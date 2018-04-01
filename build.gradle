@@ -3,20 +3,55 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.8
+allprojects {
+    apply plugin: 'java'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.0.RELEASE'
-    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
-    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.15.Final'
-    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.15.Final'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
-    compile 'org.springframework.social:spring-social-core:1.1.6.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.0.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.0.0.RELEASE'
+
+
+
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.2.16.Final'
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
+    implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.16.Final'
+
+
+    // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
+    testImplementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.5.0.jre9-preview'
+    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.2.3'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+
+
+    // https://mvnrepository.com/artifact/org.springframework.social/spring-social-core
+    implementation group: 'org.springframework.social', name: 'spring-social-core', version: '1.1.6.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.social/spring-social-config
+    implementation group: 'org.springframework.social', name: 'spring-social-config', version: '1.1.6.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.social/spring-social-security
+    implementation group: 'org.springframework.social', name: 'spring-social-security', version: '1.1.6.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.social/spring-social-web
+    implementation group: 'org.springframework.social', name: 'spring-social-web', version: '1.1.6.RELEASE'
+
+
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.1.0'
+    // https://mvnrepository.com/artifact/org.spockframework/spock-core
     testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
 
 }
