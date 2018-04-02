@@ -25,3 +25,6 @@ hs_err_pid*
 .idea
 *.iml
 *.gradle
+
+# but do not ignore gradle-wrapper
+!gradle-wrapper.jar
