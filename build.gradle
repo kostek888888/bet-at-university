@@ -1,7 +1,33 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE")
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.0.1.RELEASE'
+}
+
 group 'bet-at-university'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java-library'
+apply plugin: 'idea'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+jar {
+    baseName = 'bet-at-university'
+    version =  '1.0.1'
+}
+
+war {
+    baseName = 'bet-at-university'
+    version = '1.0.1'
+}
 
 allprojects {
     apply plugin: 'java-library'
@@ -13,12 +39,16 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    providedRuntime
+}
+
 dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.0.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.1.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
-    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.0.0.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.0.1.RELEASE'
 
 
 
@@ -54,4 +84,15 @@ dependencies {
     // https://mvnrepository.com/artifact/org.spockframework/spock-core
     testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
 
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.0.1.RELEASE'
+
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.6'
 }

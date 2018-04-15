@@ -26,5 +26,8 @@ hs_err_pid*
 *.iml
 *.gradle
 
+# exclude gradle history
+.history
+
 # but do not ignore gradle-wrapper
 !gradle-wrapper.jar
