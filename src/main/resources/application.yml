@@ -1,0 +1,18 @@
+#logging:
+#    level:
+#        org:
+#            springframework: DEBUG
+#
+#logging:
+#    level:
+#        org:
+#            springframework: ERROR
+#
+#server:
+#    servlet:
+#      context-path: /bet-at-university
+#spring:
+#    main:
+#        banner-mode: "off"
+#    datasource:
+#        platform: mariadb

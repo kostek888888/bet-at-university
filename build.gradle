@@ -49,16 +49,22 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.1.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
     implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.0.1.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.1.RELEASE'
 
 
 
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
-    // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
-    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.2.16.Final'
-    // https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
-    implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.16.Final'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.1.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.0.1.RELEASE'
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    implementation group: 'org.webjars', name: 'bootstrap', version: '4.1.0'
+
 
 
     // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc

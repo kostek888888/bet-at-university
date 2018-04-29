@@ -29,5 +29,8 @@ hs_err_pid*
 # exclude gradle history
 .history
 
+# exclude properties
+*.properties
+
 # but do not ignore gradle-wrapper
 !gradle-wrapper.jar
