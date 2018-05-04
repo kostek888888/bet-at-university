@@ -15,17 +15,15 @@
       <li class="nav-item active">
         <a class="nav-link" id="menuLink" routerLink="your-profile">Twój profil</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" id="menuLink" routerLink="home">Wyloguj</a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" id="menuLink" routerLink="login">Zaloguj</a>
+        <a class="nav-link" id="menuLink" *ngIf="!authService.user" routerLink="login">Zaloguj</a>
+      </li>
+      <li class="nav-item active">
+         <a class="nav-link" id="menuLink" *ngIf="authService.user" (click)="logout()">Wyloguj</a>
       </li>
     </ul>
   </div>
 </nav>
-
-<div class="container">
   <router-outlet></router-outlet>
-</div>
+
 

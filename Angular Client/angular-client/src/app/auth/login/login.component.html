@@ -1,0 +1,16 @@
+<div class="container">
+   <div style="display: inline-grid; margin: 10px">
+    <form (ngSubmit)="login(formData)" #formData = "ngForm">  <!--Przeslanie formukarza w lokalnej referencji formData-->
+
+        <label >Email</label>
+        <input ngModel type="email" name="email" required> <!-- ngModel niebindowane, te pole email bedzie sie znajdowalo w zm formData-->
+
+        <label>Haslo</label>
+        <input ngModel type="password" name="password" placeholder="enter min 6 characters" required minlength="6">
+
+      <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Zaloguj</button>
+      <button type="button" class="btn btn-primary" [disabled]="formData.invalid" (click)="register(formData)">Rejestracja</button>
+    </form>
+     {{authService.loginMsg}}
+  </div>
+</div>
