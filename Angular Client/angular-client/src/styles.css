@@ -9,3 +9,10 @@
   font-size: 22px;
 }
 
+.container{
+  background: silver;
+  display: grid;
+  justify-content: center;
+  height: 800px;
+}
+
