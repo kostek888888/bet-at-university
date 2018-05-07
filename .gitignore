@@ -24,7 +24,6 @@ hs_err_pid*
 # exclude .idea folder and iml
 .idea
 *.iml
-*.gradle
 
 # exclude gradle history
 .history
