@@ -10,10 +10,17 @@
 }
 
 .container{
-  background: silver;
-  display: grid;
-  justify-content: center;
-  height: 800px;
+   padding: 3rem 1.5rem;
+
+}
+
+
+form {
+    display: grid;
+    grid-template-columns: 300px;
+    grid-gap: 16px;
+    justify-content: center;
+    text-align: center;
 }
 
 

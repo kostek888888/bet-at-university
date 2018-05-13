@@ -13,6 +13,9 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { AuthService } from './auth/auth.service';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { LeagueTableComponent } from './league-table/league-table.component';
+import { HttpService } from './http.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const firebaseConfig = {
@@ -31,16 +34,18 @@ const firebaseConfig = {
     YourProfileComponent,
     HomeComponent,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    LeagueTableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpClientModule
   ],
-  providers: [AuthGuardService, AuthService],
+  providers: [AuthGuardService, AuthService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
