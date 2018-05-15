@@ -58,7 +58,7 @@ dependencies {
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.1.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.1.RELEASE'
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.0.1.RELEASE'
@@ -83,6 +83,23 @@ dependencies {
     implementation group: 'org.springframework.social', name: 'spring-social-security', version: '1.1.6.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.social/spring-social-web
     implementation group: 'org.springframework.social', name: 'spring-social-web', version: '1.1.6.RELEASE'
+
+
+
+    // swagger link: localhost:8080/swagger-ui.html
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
+    // https://mvnrepository.com/artifact/io.springfox/springfox-bean-validators
+    implementation group: 'io.springfox', name: 'springfox-bean-validators', version: '2.8.0'
+    // https://mvnrepository.com/artifact/io.springfox/springfox-schema
+    implementation group: 'io.springfox', name: 'springfox-schema', version: '2.8.0'
+    // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+    // https://mvnrepository.com/artifact/io.springfox/springfox-data-rest
+    implementation group: 'io.springfox', name: 'springfox-data-rest', version: '2.8.0'
+
 
 
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
