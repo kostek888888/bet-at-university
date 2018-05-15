@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
+import { LeagueTableModel } from './models/leagueTableModel';
 
 @Injectable()
 export class HttpService {
@@ -9,8 +10,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  getLeagueTable() {
-
-    return this.http.get('http://api.football-data.org/v1/competitions/445/leagueTable', {headers: this.apiKeyHeader});
+  getLeagueTable(): Observable<LeagueTableModel> {
+    return this.http.get<LeagueTableModel>('http://api.football-data.org/v1/competitions/445/leagueTable', {headers: this.apiKeyHeader});
   }
 }

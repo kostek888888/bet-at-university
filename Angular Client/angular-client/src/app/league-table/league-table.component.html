@@ -1,7 +1,31 @@
 <div class="container">
-  <p>
-    league-table works!
-  </p>
-  <button (click)="getLeagueTable()">Pobierz tabele z api do konsoli</button>
+  <div class="siteTitle"><h1>Tabela ligowa</h1></div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Pozycja</th>
+        <th>Nazwa drużyny</th>
+        <th>Rozegranych meczy</th>
+        <th>Punkty w lidze</th>
+        <th>Gole</th>
+        <th>l. zwycięstw</th>
+        <th>l. porażek</th>
+        <th>l. remisow</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let elem of standingsTable">
+        <td>{{elem.position}}</td>
+        <td> <img src="{{elem.crestURI}}" alt="Smiley face" height="32" width="32"> {{elem.teamName}}</td>
+        <td>{{elem.playedGames}}</td>
+        <td>{{elem.points}}</td>
+        <td>{{elem.goals}}</td>
+        <td>{{elem.wins}}</td>
+        <td>{{elem.losses}}</td>
+        <td>{{elem.draws}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { LeagueTableModel, Convert } from '../models/leagueTableModel';
 
 @Component({
   selector: 'app-league-table',
@@ -10,12 +11,16 @@ export class LeagueTableComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
 
+   standingsTable: LeagueTableModel['standing'];
+
   ngOnInit() {
+    this.getLeagueTable();
   }
 
   getLeagueTable() {
     this.httpService.getLeagueTable().subscribe(leagueTable => {
-      console.log(leagueTable);
+      this.standingsTable = Convert.toLeagueTableModel(JSON.stringify(leagueTable.standing));
+      console.log(this.standingsTable);
     });
   }
 }
