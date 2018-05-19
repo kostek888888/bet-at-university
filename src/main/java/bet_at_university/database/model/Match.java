@@ -3,7 +3,8 @@ package bet_at_university.database.model;
 import javax.persistence.*;
 
 @Entity
-public class Matches {
+@Table(name="\"match\"")
+public class Match {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

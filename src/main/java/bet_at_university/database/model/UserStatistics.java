@@ -18,7 +18,7 @@ public class UserStatistics {
 
     private int biggestWin;
 
-    private int biggestWinDate;
+    private String biggestWinDate;
 
     private int accountBalance;
 
@@ -54,11 +54,9 @@ public class UserStatistics {
         this.biggestWin = biggestWin;
     }
 
-    public int getBiggestWinDate() {
-        return biggestWinDate;
-    }
+    public String getBiggestWinDate() { return biggestWinDate; }
 
-    public void setBiggestWinDate(int biggestWinDate) {
+    public void setBiggestWinDate(String biggestWinDate) {
         this.biggestWinDate = biggestWinDate;
     }
 

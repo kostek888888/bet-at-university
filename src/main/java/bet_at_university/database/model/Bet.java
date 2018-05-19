@@ -11,7 +11,7 @@ public class Bet {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "match_id", nullable = false)
-    private Matches matches;
+    private Match match;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -35,12 +35,12 @@ public class Bet {
         this.id = id;
     }
 
-    public Matches getMatches() {
-        return matches;
+    public Match getMatches() {
+        return match;
     }
 
-    public void setMatches(Matches matches) {
-        this.matches = matches;
+    public void setMatches(Match matches) {
+        this.match = matches;
     }
 
     public User getUser() {
