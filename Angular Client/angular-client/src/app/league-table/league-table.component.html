@@ -1,5 +1,4 @@
-<div class="container">
-  <div class="siteTitle"><h1>Tabela ligowa</h1></div>
+<h1>Tabela ligowa</h1>
   <table class="table table-striped sortable">
     <thead>
       <tr>
@@ -16,7 +15,7 @@
     <tbody>
       <tr *ngFor="let elem of standingsTable">
         <td>{{elem.position}}</td>
-        <td> <img src="{{elem.crestURI}}" alt="Smiley face" height="32" width="32"> {{elem.teamName}}</td>
+        <td> <img src="{{elem.crestURI}}" alt="image not load" height="32" width="32"> {{elem.teamName}}</td>
         <td>{{elem.playedGames}}</td>
         <td>{{elem.points}}</td>
         <td>{{elem.goals}}</td>
@@ -26,6 +25,5 @@
       </tr>
     </tbody>
   </table>
-</div>
 
 
