@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { FixturesArray, Convert } from '../models/fixturesModel';
 
 @Component({
   selector: 'app-games-results',
@@ -8,28 +9,29 @@ import { HttpService } from '../http.service';
 })
 export class GamesResultsComponent implements OnInit {
 
-  gamesResults = null;
+  gamesResults: FixturesArray['fixtures'];
   formObj = new FormModel();
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
+    this.getSearchResult();
+    console.log(this.gamesResults);
   }
 
   getSearchResult() {
     if (this.formObj.filter === 'searchMatchday') {
       this.httpService.getFixturesByMatchday(this.formObj.searchText).subscribe(response => {
-        this.gamesResults = JSON.stringify(response);
+        this.gamesResults = Convert.toFixtures(JSON.stringify(response.fixtures));
         console.log(response);
       });
     } else {
-      // pobierz mecze dla druzyny 3 dni przed i 3 dni wprzod
       this.httpService.getPastFixturesByTeam(this.formObj.searchText, '3').subscribe(response => {
-        this.gamesResults = JSON.stringify(response);
+        this.gamesResults = Convert.toFixtures(JSON.stringify(response.fixtures));
         console.log(response);
       });
 
       this.httpService.getNextFixturesByTeam(this.formObj.searchText, '3').subscribe(response => {
-        this.gamesResults += JSON.stringify(response);
+        this.gamesResults = Convert.toFixtures(JSON.stringify(response.fixtures));
         console.log(response);
       });
     }
@@ -41,4 +43,9 @@ export class GamesResultsComponent implements OnInit {
 export class FormModel {
   searchText?: string;
   filter = 'searchMatchday';
+}
+
+export class IdToTeamName {
+  id: number;
+  teamName: string;
 }

@@ -9,7 +9,7 @@
 
     <div class="col-3">
       <select [(ngModel)]="formObj.filter" class="form-control" name="search_filter">
-        <option value="searchMatchday">Dzień meczowy</option>
+        <option value="searchMatchday">Tydzień meczowy</option>
         <option value="searchTeam">Drużyna</option>
       </select>
     </div>
@@ -23,7 +23,30 @@
 <br>
 <br>
 
-{{gamesResults}}
+<table class="table table-striped sortable">
+  <thead>
+    <tr>
+      <th>Gospodarze</th>
+      <th>Wynik</th>
+      <th>Goscie</th>
+      <th>Data</th>
+      <th>Status</th>
+      <th>Tydzień meczowy</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let elem of gamesResults">
+      <td>{{elem.homeTeamName}}</td>
+      <td>{{elem.result.goalsHomeTeam}} - {{elem.result.goalsAwayTeam}}</td>
+      <td>{{elem.awayTeamName}}</td>
+      <td>{{elem.date | date:'yyyy-MM-dd'}}</td>
+      <td>{{elem.status}}</td>
+      <td>{{elem.matchday}}</td>
+    </tr>
+  </tbody>
+</table>
+
 
 
 

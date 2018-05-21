@@ -55,7 +55,7 @@ export namespace Convert {
     return JSON.parse(json);
   }
 
-  export function leagueTableModelToJson(value: LeagueTableModel): string {
+  export function leagueTableModelToJson(value: LeagueTableModel['standing']): string {
     return JSON.stringify(value, null, 2);
   }
 }
