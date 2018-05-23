@@ -1,0 +1,29 @@
+<h1>Tabela ligowa</h1>
+  <table class="table table-striped sortable">
+    <thead>
+      <tr>
+        <th>Pozycja</th>
+        <th>Nazwa drużyny</th>
+        <th>Rozegranych meczy</th>
+        <th>Punkty w lidze</th>
+        <th>Gole</th>
+        <th>l. zwycięstw</th>
+        <th>l. porażek</th>
+        <th>l. remisow</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let elem of standingsTable">
+        <td>{{elem.position}}</td>
+        <td> <img src="{{elem.crestURI}}" alt="image not load" height="32" width="32"> {{elem.teamName}}</td>
+        <td>{{elem.playedGames}}</td>
+        <td>{{elem.points}}</td>
+        <td>{{elem.goals}}</td>
+        <td>{{elem.wins}}</td>
+        <td>{{elem.losses}}</td>
+        <td>{{elem.draws}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+

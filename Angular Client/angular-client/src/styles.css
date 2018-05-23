@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+.menuStyle{
+  background-color: #337AB7;
+}
+
+#menuLink{
+  color: #000;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.container{
+   padding: 3rem 1.5rem;
+
+}
+
+
+
+
+.siteTitle{
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+
