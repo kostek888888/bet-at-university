@@ -11,7 +11,7 @@ export class LeagueTableComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
 
-   standingsTable: LeagueTableModel['standing'];
+   standingsTable: LeagueTableModel;
 
   ngOnInit() {
     this.getLeagueTable();
@@ -19,7 +19,7 @@ export class LeagueTableComponent implements OnInit {
 
   getLeagueTable() {
     this.httpService.getLeagueTable().subscribe(leagueTable => {
-      this.standingsTable = Convert.toLeagueTableModel(JSON.stringify(leagueTable.standing));
+      this.standingsTable = Convert.toLeagueTableModel(JSON.stringify(leagueTable));
       console.log(this.standingsTable);
     });
   }

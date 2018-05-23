@@ -4,10 +4,7 @@ import bet_at_university.database.model.Match;
 import bet_at_university.database.repository.MatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -18,11 +15,13 @@ public class MatchController {
     @Autowired
     private MatchRepository matchRepository;
 
+    @CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/match")
     public @ResponseBody Iterable<Match> getAllMatches(){
         return matchRepository.findAll();
     }
 
+    @CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/matchId")
     public @ResponseBody
     Optional<Match> getMatchFromId(@RequestParam int id){

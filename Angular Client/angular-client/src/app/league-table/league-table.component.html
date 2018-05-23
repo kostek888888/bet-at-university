@@ -14,14 +14,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let elem of standingsTable">
-        <td>{{elem.position}}</td>
-        <td> <img src="{{elem.crestURI}}" alt="image not load" height="32" width="32"> {{elem.teamName}}</td>
-        <td>{{elem.playedGames}}</td>
-        <td>{{elem.points}}</td>
-        <td>{{elem.goals}}</td>
-        <td>{{elem.wins}}</td>
-        <td>{{elem.losses}}</td>
-        <td>{{elem.draws}}</td>
+        <td>{{elem.id}}</td>
+        <td> <img src="{{elem.teamStatistics.img}}" alt="image not load" height="32" width="32"> {{elem.name}}</td>
+        <td>{{elem.teamStatistics.playedGames}}</td>
+        <td>{{elem.teamStatistics.points}}</td>
+        <td>{{elem.teamStatistics.goals}}</td>
+        <td>{{elem.teamStatistics.wonMatches}}</td>
+        <td>{{elem.teamStatistics.lostMatches}}</td>
+        <td>{{elem.teamStatistics.drawMatches}}</td>
       </tr>
     </tbody>
   </table>

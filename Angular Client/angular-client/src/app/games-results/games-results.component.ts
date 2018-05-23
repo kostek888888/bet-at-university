@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { FixturesArray, Convert } from '../models/fixturesModel';
+import { MatchModel, Convert } from '../models/matchModel';
 
 @Component({
   selector: 'app-games-results',
@@ -9,32 +9,52 @@ import { FixturesArray, Convert } from '../models/fixturesModel';
 })
 export class GamesResultsComponent implements OnInit {
 
-  gamesResults: FixturesArray['fixtures'];
+  matchModelObj: Array<MatchModel>;
   formObj = new FormModel();
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    this.getSearchResult();
-    console.log(this.gamesResults);
+    // this.searchOnInit();
+    console.log(this.matchModelObj);
+  }
+
+  searchOnInit() {
+    this.httpService.getMatch().subscribe(response => {
+      this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
+      console.log(this.matchModelObj);
+    });
   }
 
   getSearchResult() {
-    if (this.formObj.filter === 'searchMatchday') {
-      this.httpService.getFixturesByMatchday(this.formObj.searchText).subscribe(response => {
-        this.gamesResults = Convert.toFixtures(JSON.stringify(response.fixtures));
-        console.log(response);
+    if (this.formObj.filter === 'noFilter') {
+      this.httpService.getMatch().subscribe(response => {
+        this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
       });
-    } else {
-      this.httpService.getPastFixturesByTeam(this.formObj.searchText, '3').subscribe(response => {
-        this.gamesResults = Convert.toFixtures(JSON.stringify(response.fixtures));
-        console.log(response);
-      });
+    } else if (this.formObj.filter === 'searchByDay') {
+      this.httpService.getMatch().subscribe(response => {
+        this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
 
-      this.httpService.getNextFixturesByTeam(this.formObj.searchText, '3').subscribe(response => {
-        this.gamesResults = Convert.toFixtures(JSON.stringify(response.fixtures));
-        console.log(response);
+        // fitrowanie po dacie
+        this.matchModelObj = this.matchModelObj.filter(item => item.matchDateAndTime >= this.formObj.searchText);
+        // console.log(this.matchModelObj[0].matchDateAndTime + 'obj date');
+        // console.log(this.formObj.searchText + 'form date');
+        // console.log(this.matchModelObj);
       });
-    }
+    } else if (this.formObj.filter === 'searchByHomeTeamName') {
+        this.httpService.getMatch().subscribe(response => {
+        this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
+
+        // fitrowanie po nazwie druzyny
+        this.matchModelObj = this.matchModelObj.filter(item => item.homeTeamId.name === this.formObj.searchText);
+      });
+    } else if (this.formObj.filter === 'searchByAwayTeamName') {
+      this.httpService.getMatch().subscribe(response => {
+        this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
+
+        // fitrowanie po nazwie druzyny
+        this.matchModelObj = this.matchModelObj.filter(item => item.awayTeamId.name === this.formObj.searchText);
+      });
+    } else { }
   }
 
 }
@@ -42,10 +62,5 @@ export class GamesResultsComponent implements OnInit {
 
 export class FormModel {
   searchText?: string;
-  filter = 'searchMatchday';
-}
-
-export class IdToTeamName {
-  id: number;
-  teamName: string;
+  filter = 'noFilter';
 }

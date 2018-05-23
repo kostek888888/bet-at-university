@@ -2,9 +2,18 @@
 //
 //   import { Convert } from "./file";
 //
-//   const leagueTableModel = Convert.toLeagueTableModel(json);
+//   const matchModel = Convert.toMatchModel(json);
 
-export interface LeagueTableModel {
+export interface MatchModel {
+  id: number;
+  homeTeamId: TeamID;
+  awayTeamId: TeamID;
+  homeTeamScore: number;
+  awayTeamScore: number;
+  matchDateAndTime: string;
+}
+
+export interface TeamID {
   id: number;
   name: string;
   teamStatistics: TeamStatistics;
@@ -28,11 +37,11 @@ export enum LeagueName {
 
 // Converts JSON strings to/from your types
 export namespace Convert {
-  export function toLeagueTableModel(json: string): LeagueTableModel {
+  export function toMatchModel(json: string): MatchModel[] {
     return JSON.parse(json);
   }
 
-  export function leagueTableModelToJson(value: LeagueTableModel): string {
+  export function matchModelToJson(value: MatchModel[]): string {
     return JSON.stringify(value, null, 2);
   }
 }
