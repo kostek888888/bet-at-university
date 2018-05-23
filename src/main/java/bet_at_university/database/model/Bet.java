@@ -9,13 +9,17 @@ public class Bet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "match_id", nullable = false)
     private Match match;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToOne()
+    @JoinColumn(name = "bet_rate_id", nullable = false)
+    private BetRate betRate;
 
     private String buyDateAndTime;
 
@@ -49,6 +53,14 @@ public class Bet {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public BetRate getBetRate() {
+        return betRate;
+    }
+
+    public void setBetRate(BetRate betRate) {
+        this.betRate = betRate;
     }
 
     public String getBuyDateAndTime() {

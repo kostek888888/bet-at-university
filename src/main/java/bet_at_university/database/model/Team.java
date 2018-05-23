@@ -11,7 +11,7 @@ public class Team {
 
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "team_statistics_id", nullable = false)
     private TeamStatistics teamStatistics;
 

@@ -10,17 +10,13 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "home_team_id", nullable = false)
     private Team homeTeamId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "away_team_id", nullable = false)
     private Team awayTeamId;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bet_rate_id", nullable = false)
-    private BetRate betRate;
 
     private int homeTeamScore;
 
@@ -52,13 +48,6 @@ public class Match {
         this.awayTeamId = awayTeamId;
     }
 
-    public BetRate getBetRate() {
-        return betRate;
-    }
-
-    public void setBetRate(BetRate betRate) {
-        this.betRate = betRate;
-    }
 
     public int getHomeTeamScore() {
         return homeTeamScore;

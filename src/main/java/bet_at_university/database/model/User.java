@@ -9,7 +9,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "user_statistics_id")
     private UserStatistics userStatistics;
 
@@ -22,6 +22,11 @@ public class User {
     private String address;
 
     private String postCode;
+
+    @Column(name = "login", unique = true)
+    private String login;
+
+    private String password;
 
 
 
@@ -79,5 +84,21 @@ public class User {
 
     public void setPostCode(String postCode) {
         this.postCode = postCode;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

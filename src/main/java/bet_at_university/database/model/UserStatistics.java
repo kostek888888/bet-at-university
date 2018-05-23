@@ -16,11 +16,11 @@ public class UserStatistics {
 
     private int lostMatches;
 
-    private int biggestWin;
+    private double biggestWin;
 
     private String biggestWinDate;
 
-    private int accountBalance;
+    private double accountBalance;
 
     public long getId() {
         return id;
@@ -46,11 +46,11 @@ public class UserStatistics {
         this.lostMatches = lostMatches;
     }
 
-    public int getBiggestWin() {
+    public double getBiggestWin() {
         return biggestWin;
     }
 
-    public void setBiggestWin(int biggestWin) {
+    public void setBiggestWin(double biggestWin) {
         this.biggestWin = biggestWin;
     }
 
@@ -60,11 +60,11 @@ public class UserStatistics {
         this.biggestWinDate = biggestWinDate;
     }
 
-    public int getAccountBalance() {
+    public double getAccountBalance() {
         return accountBalance;
     }
 
-    public void setAccountBalance(int accountBalance) {
+    public void setAccountBalance(double accountBalance) {
         this.accountBalance = accountBalance;
     }
 }

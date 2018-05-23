@@ -20,6 +20,14 @@ public class TeamStatistics {
 
     private String leagueName;
 
+    private int playedGames;
+
+    private int points;
+
+    private int goals;
+
+    private String img;
+
     public long getId() {
         return id;
     }
@@ -58,5 +66,37 @@ public class TeamStatistics {
 
     public void setLeagueName(String leagueName) {
         this.leagueName = leagueName;
+    }
+
+    public int getPlayedGames() {
+        return playedGames;
+    }
+
+    public void setPlayedGames(int playedGames) {
+        this.playedGames = playedGames;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getGoals() {
+        return goals;
+    }
+
+    public void setGoals(int goals) {
+        this.goals = goals;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }
