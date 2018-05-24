@@ -40,19 +40,13 @@ export class GamesResultsComponent implements OnInit {
         // console.log(this.formObj.searchText + 'form date');
         // console.log(this.matchModelObj);
       });
-    } else if (this.formObj.filter === 'searchByHomeTeamName') {
+    } else if (this.formObj.filter === 'searchByTeamName') {
         this.httpService.getMatch().subscribe(response => {
         this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
 
         // fitrowanie po nazwie druzyny
-        this.matchModelObj = this.matchModelObj.filter(item => item.homeTeamId.name === this.formObj.searchText);
-      });
-    } else if (this.formObj.filter === 'searchByAwayTeamName') {
-      this.httpService.getMatch().subscribe(response => {
-        this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
-
-        // fitrowanie po nazwie druzyny
-        this.matchModelObj = this.matchModelObj.filter(item => item.awayTeamId.name === this.formObj.searchText);
+        this.matchModelObj = this.matchModelObj.filter(item =>
+          item.homeTeamId.name === this.formObj.searchText || item.awayTeamId.name === this.formObj.searchText);
       });
     } else { }
   }
@@ -60,7 +54,7 @@ export class GamesResultsComponent implements OnInit {
 }
 
 
-export class FormModel {
+class FormModel {
   searchText?: string;
   filter = 'noFilter';
 }
