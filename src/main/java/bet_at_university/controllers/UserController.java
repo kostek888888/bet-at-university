@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Controller
@@ -31,6 +32,7 @@ public class UserController {
 
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
+    @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/register")
     public @ResponseBody
     void registrationUser(@RequestParam String name, String surname, String birthDate,
@@ -59,25 +61,37 @@ public class UserController {
         userRepository.save(user);
     }
 
+    @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/logIn", value = "/logIn")
     public @ResponseBody
-    void logIn(HttpServletResponse response, @RequestParam String login, String password) {
+    void logIn(HttpServletResponse response, @RequestParam String login, String password) throws IOException {
         userArrayList = (ArrayList<User>) userRepository.findAll();
 
         for (int i=0; i<userArrayList.size(); i++) {
             System.out.println(i);
             if (bCryptPasswordEncoder.matches(password, userArrayList.get(i).getPassword())
                     && login.equals(userArrayList.get(i).getLogin())) {
+                response.setContentType("text/html");
+
                 Cookie cookie = new Cookie("bet_at_university_cookie", login);
                 cookie.setMaxAge(60 * 60);
                 cookie.setPath("/");
                 cookie.setHttpOnly(true);
-                response.addCookie(cookie);
+                cookie.setSecure(false);
+                try {
+                    response.addCookie(cookie);
+                    System.out.println("zalogowany: login: " + login + " pass: " + password);
+                    System.out.println("Response contentType " + response.getContentType());
+                    System.out.println("Status żądania " + response.getStatus());
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+
                 break;
             }
         }
     }
-
+    @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/logOut")
     public void logOut(HttpServletResponse response){
         Cookie cookie = new Cookie("bet_at_university_cookie", null);

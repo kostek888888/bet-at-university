@@ -6,7 +6,7 @@
         <input ngModel type="email" name="email" required> <!-- ngModel niebindowane, te pole email bedzie sie znajdowalo w zm formData-->
 
         Haslo
-        <input ngModel type="password" name="password" placeholder="enter min 6 characters" required minlength="6">
+        <input ngModel type="password" name="password" placeholder="enter min 6 characters" required minlength="3">
 
       <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Zaloguj</button>
       <button type="button" class="btn btn-primary" [disabled]="formData.invalid" (click)="register(formData)">Rejestracja</button>
