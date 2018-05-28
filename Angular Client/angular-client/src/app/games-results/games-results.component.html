@@ -11,8 +11,7 @@
       <select [(ngModel)]="formObj.filter" class="form-control" name="search_filter">
         <option value="noFilter"></option>
         <option value="searchByDay">Data od "YYYY/MM/DD"</option>
-        <option value="searchByHomeTeamName">Nazwa drużyny gospodarzy</option>
-        <option value="searchByAwayTeamName">Nazwa drużyny gości</option>
+        <option value="searchByTeamName">Nazwa drużyny </option>
       </select>
     </div>
 
@@ -22,8 +21,6 @@
   </div>
 
 </form>
-<br>
-<br>
 
 <table class="table table-striped sortable">
   <thead>
@@ -36,7 +33,7 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let elem of matchModelObj">
+    <tr *ngFor="let elem of matchesArray">
       <td>{{elem.homeTeamId.name}}</td>
       <td>{{elem.homeTeamScore}} - {{elem.awayTeamScore}}</td>
       <td>{{elem.awayTeamId.name}}</td>
