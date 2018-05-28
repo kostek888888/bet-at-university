@@ -34,7 +34,7 @@ class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
 
-        JsonParserTeamStatistics jsonParserTeamStatistics = new JsonParserTeamStatistics();
+         JsonParserTeamStatistics jsonParserTeamStatistics = new JsonParserTeamStatistics();
         JsonParserTeam jsonParserTeam = new JsonParserTeam();
         MatchData matchData = new MatchData();
         BetRateData betRateData = new BetRateData();

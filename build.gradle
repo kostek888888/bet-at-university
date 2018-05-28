@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
     }
 }
 
@@ -110,6 +110,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.0.1.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.0.2.RELEASE'
 
 
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
