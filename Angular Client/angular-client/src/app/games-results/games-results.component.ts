@@ -9,65 +9,58 @@ import { MatchModel, Convert } from '../models/matchModel';
 })
 export class GamesResultsComponent implements OnInit {
 
-  matchesArray: Array<MatchModel>;
+  matchModelObj: Array<MatchModel>;
   formObj = new FormModel();
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    this.getFirstFiveMatches();
+    // this.searchOnInit();
+    console.log(this.matchModelObj);
   }
 
-  getFirstFiveMatches() {
-    // print only 5 newest matches in table when page init
+  searchOnInit() {
     this.httpService.getMatch().subscribe(response => {
-      this.matchesArray = Convert.toMatchModel(JSON.stringify(response));
-      this.matchesArray = this.sortMatchesByDate(this.matchesArray);
-      if (this.matchesArray.length >= 5) {
-       this.matchesArray = this.matchesArray.slice(0, 5);
-      }
+      this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
+      console.log(this.matchModelObj);
     });
   }
 
   getSearchResult() {
     if (this.formObj.filter === 'noFilter') {
       this.httpService.getMatch().subscribe(response => {
-        this.matchesArray = Convert.toMatchModel(JSON.stringify(response));
-        this.matchesArray = this.sortMatchesByDate(this.matchesArray);
+        this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
       });
     } else if (this.formObj.filter === 'searchByDay') {
       this.httpService.getMatch().subscribe(response => {
-        this.matchesArray = Convert.toMatchModel(JSON.stringify(response));
+        this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
 
         // fitrowanie po dacie
-        this.matchesArray = this.matchesArray.filter(item => item.matchDateAndTime >= this.formObj.searchText);
-        this.matchesArray = this.sortMatchesByDate(this.matchesArray);
+        this.matchModelObj = this.matchModelObj.filter(item => item.matchDateAndTime >= this.formObj.searchText);
+        // console.log(this.matchModelObj[0].matchDateAndTime + 'obj date');
+        // console.log(this.formObj.searchText + 'form date');
+        // console.log(this.matchModelObj);
       });
-    } else if (this.formObj.filter === 'searchByTeamName') {
+    } else if (this.formObj.filter === 'searchByHomeTeamName') {
         this.httpService.getMatch().subscribe(response => {
-        this.matchesArray = Convert.toMatchModel(JSON.stringify(response));
+        this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
 
         // fitrowanie po nazwie druzyny
-        this.matchesArray = this.matchesArray.filter(item =>
-          item.homeTeamId.name === this.formObj.searchText || item.awayTeamId.name === this.formObj.searchText
-        );
-        this.matchesArray = this.sortMatchesByDate(this.matchesArray);
+        this.matchModelObj = this.matchModelObj.filter(item => item.homeTeamId.name === this.formObj.searchText);
       });
+    } else if (this.formObj.filter === 'searchByAwayTeamName') {
+      this.httpService.getMatch().subscribe(response => {
+        this.matchModelObj = Convert.toMatchModel(JSON.stringify(response));
 
+        // fitrowanie po nazwie druzyny
+        this.matchModelObj = this.matchModelObj.filter(item => item.awayTeamId.name === this.formObj.searchText);
+      });
     } else { }
   }
 
-  sortMatchesByDate(matchesArray: Array<MatchModel>): Array<MatchModel> {
-    matchesArray.sort((match1, match2): number => {
-      if (match1.matchDateAndTime > match2.matchDateAndTime) { return -1; }
-      if (match1.matchDateAndTime < match2.matchDateAndTime) { return 1; }
-      return 0;
-    });
-    return matchesArray;
-  }
 }
 
 
-class FormModel {
+export class FormModel {
   searchText?: string;
   filter = 'noFilter';
 }
