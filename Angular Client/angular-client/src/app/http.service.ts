@@ -21,14 +21,14 @@ export class HttpService {
     return this.http.get<MatchModel>( this.baseURl + '/match');
   }
 
-  postLogin(login_param: string, password_param: string): Observable<number> {
+  postLogin(login_param: string, password_param: string): Observable<boolean> {
     const params = new HttpParams()
       .append('login', login_param)
       .append('password', password_param);
-    return this.http.post<number>( this.baseURl + '/logIn', params, { withCredentials: true} );
+    return this.http.post<boolean>( this.baseURl + '/logIn', params, { withCredentials: true} );
   }
 
-  postLogout() {
-    this.http.post(this.baseURl +  '/logout', {});
+  postLogout(): Observable<boolean> {
+    return this.http.post<boolean>(this.baseURl + '/logOut', null, { withCredentials: true });
   }
 }

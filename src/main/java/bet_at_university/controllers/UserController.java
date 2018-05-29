@@ -61,13 +61,14 @@ public class UserController {
         userRepository.save(user);
     }
 
-    // return userId in db if cookie create (user is logged in), else return false. Front-end need this to check is user logged
+    // return true if cookie create (user is logged in), else return false. Front-end need this to check is user logged
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/logIn", value = "/logIn")
     public @ResponseBody
-    Long logIn(HttpServletResponse response, @RequestParam String login, @RequestParam String password) {
+    Boolean logIn(HttpServletResponse response, @RequestParam String login, @RequestParam String password) {
         userArrayList = (ArrayList<User>) userRepository.findAll();
         response.setHeader("Access-Control-Allow-Credentials", "true"); // need to unlock response to resource (CORS)
+
 
         for (int i=0; i<userArrayList.size(); i++) {
             System.out.println(i);
@@ -77,29 +78,30 @@ public class UserController {
                 Cookie cookie = new Cookie("bet_at_university_cookie",  Long.toString( userArrayList.get(i).getId() ) ); // matched userId is cookie value (userId number represents userId in db table)
                 cookie.setMaxAge(60 * 60);
                 cookie.setPath("/");
-                cookie.setHttpOnly(true);
+                cookie.setHttpOnly(false);  // font-end can't read httpOnly = true cookies
                 cookie.setSecure(false);
                 try {
                     response.addCookie(cookie);
-//                    System.out.println("zalogowany: login: " + login + " pass: " + password);
-//                    System.out.println("Response contentType " + response.getContentType());
-//                    System.out.println("Status żądania " + response.getStatus());
-                    return userArrayList.get(i).getId();
+                    return Boolean.TRUE;
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
                 break;
             }
         }
-        return null;
+        return  Boolean.FALSE;
     }
     @CrossOrigin(origins="http://localhost:4200")
-    @PostMapping(path = "/logOut")
-    public void logOut(HttpServletResponse response){
+    @PostMapping(path = "/logOut", value = "/logOut")
+    public @ResponseBody Boolean logOut(HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Credentials", "true");
         Cookie cookie = new Cookie("bet_at_university_cookie", null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
+        System.out.print("wylogowany");
+        return Boolean.TRUE;
+
     }
 
 

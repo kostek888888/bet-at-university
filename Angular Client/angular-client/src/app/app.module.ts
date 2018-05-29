@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { GamesResultsComponent } from './games-results/games-results.component';
@@ -47,7 +48,7 @@ const firebaseConfig = {
     AngularFireAuthModule,
     HttpClientModule
   ],
-  providers: [AuthGuardService, AuthService, HttpService],
+  providers: [AuthGuardService, AuthService, HttpService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

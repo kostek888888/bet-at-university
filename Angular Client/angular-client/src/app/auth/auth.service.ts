@@ -1,27 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../http.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable()
 export class AuthService {
 
-  isLogged: number;
+  public userId: number;
   loginMsg: string;
 
-  constructor(private httpService: HttpService, private router: Router) {
-    console.log(this.isLogged);
+  constructor(private httpService: HttpService, private cookieService: CookieService, private router: Router) {
+    this.checkCookieExistAndInitUserIdVariable(); // on init check cookie
+   }
+
+   checkCookieExistAndInitUserIdVariable(): void {
+     if (this.cookieService.check('bet_at_university_cookie') === true) {
+       this.userId = parseInt(this.cookieService.get('bet_at_university_cookie'), 10);
+     } else {
+       console.log('auth.service.ts constructor: nie ma takiego ciasteczka');
+     }
    }
 
    // zadanie logowania zwraca true jesli zalogowany lub false jesli nie
   login(login: string, password: string) {
-    this.httpService.postLogin(login, password).subscribe(userIdResponse => {
-      if (userIdResponse) {
-        this.isLogged = userIdResponse;
+    this.httpService.postLogin(login, password).subscribe(cookieCreateStatus => {
+      if (cookieCreateStatus) {
+        this.userId = parseInt(this.cookieService.get('bet_at_university_cookie'), 10);
+        this.router.navigate(['your-profile']);
       } else {
-        this.isLogged = null;
+        this.userId = null;
       }
-      console.log('userId in db: ' + this.isLogged);
+      console.log('userId in db: ' + this.userId);
     });
   }
 
@@ -37,7 +47,12 @@ export class AuthService {
 }
 
   logout() {
-    this.httpService.postLogout();
+    this.httpService.postLogout().subscribe(logoutStatus => {
+      if (logoutStatus) {
+        this.userId = null;
+      }
+      console.log('Logout status: ' + logoutStatus);
+    });
   }
 
   clearLoginMsg() {
