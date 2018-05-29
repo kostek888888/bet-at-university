@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../http.service';
-import { LoginModel } from '../models/userModel';
+
 
 @Injectable()
 export class AuthService {
 
-  user: LoginModel;
+  isLogged: number;
   loginMsg: string;
 
   constructor(private httpService: HttpService, private router: Router) {
-    console.log(this.user);
+    console.log(this.isLogged);
    }
 
+   // zadanie logowania zwraca true jesli zalogowany lub false jesli nie
   login(login: string, password: string) {
-    this.httpService.postLogin(login, password).subscribe(user => {
-      this.user = user;
-      console.log(this.user);
+    this.httpService.postLogin(login, password).subscribe(userIdResponse => {
+      if (userIdResponse) {
+        this.isLogged = userIdResponse;
+      } else {
+        this.isLogged = null;
+      }
+      console.log('userId in db: ' + this.isLogged);
     });
   }
 
@@ -32,8 +37,7 @@ export class AuthService {
 }
 
   logout() {
-    // this.angularFire.auth.signOut();
-    // this.router.navigate(['/login']);
+    this.httpService.postLogout();
   }
 
   clearLoginMsg() {

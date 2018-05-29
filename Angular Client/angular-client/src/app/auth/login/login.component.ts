@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private router: Router) {
   }
 
   login(formData: NgForm) {
@@ -21,5 +22,9 @@ export class LoginComponent implements OnInit {
 
   register(formData: NgForm) {
     this.authService.register(formData.value.email, formData.value.password);
+  }
+
+  redirectToRegister() {
+    this.router.navigate(['/register']);
   }
 }

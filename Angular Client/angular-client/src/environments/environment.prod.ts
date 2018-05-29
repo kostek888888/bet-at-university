@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  config: {
+    baseURL: 'http://localhost:1111'   // add without ending "/" f.e. http://localhost:8080
+  }
 };

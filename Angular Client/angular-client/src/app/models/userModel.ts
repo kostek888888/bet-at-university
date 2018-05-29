@@ -7,8 +7,3 @@ export interface User {
   postCode: string;
   city: string;
 }
-
-export interface LoginModel {
-  login: string;
-  password: string;
-}

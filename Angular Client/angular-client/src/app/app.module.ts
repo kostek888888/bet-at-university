@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { LeagueTableComponent } from './league-table/league-table.component';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
 
 
 const firebaseConfig = {
@@ -35,7 +36,8 @@ const firebaseConfig = {
     HomeComponent,
     PageNotFoundComponent,
     LoginComponent,
-    LeagueTableComponent
+    LeagueTableComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
