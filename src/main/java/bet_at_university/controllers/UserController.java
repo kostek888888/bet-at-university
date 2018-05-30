@@ -105,4 +105,17 @@ public class UserController {
     }
 
 
+    @CrossOrigin(origins="http://localhost:4200")
+    @GetMapping(path = "/checkUsers")
+    public @ResponseBody String checkUsers(@RequestParam String login) {
+        ArrayList<User> arrayListUsers = new ArrayList<>();
+        arrayListUsers = (ArrayList<User>) userRepository.findAll();
+        for (int i = 0; i < arrayListUsers.size(); i++) {
+            if (login.equals(arrayListUsers.get(i).getLogin())) {
+                return "Login zajęty";
+            }
+        }
+        return "Login wolny";
+    }
+
 }
