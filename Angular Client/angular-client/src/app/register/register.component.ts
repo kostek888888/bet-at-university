@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit {
       } else {
         this.checkLoginAvailability = false;
         this.registerStatus = false;
-        console.log('loginAvailable: false');
       }
     });
   }

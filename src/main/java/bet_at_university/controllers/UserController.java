@@ -35,8 +35,8 @@ public class UserController {
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/register")
     public @ResponseBody
-    void registrationUser(@RequestParam String name, String surname, String birthDate,
-                          String address, String postCode, String login, String password) {
+    Boolean registrationUser(HttpServletResponse response, @RequestParam String name, @RequestParam String surname, @RequestParam String birthDate,
+                             @RequestParam String address, @RequestParam String postCode, @RequestParam String login, @RequestParam String password) {
 
         User user = new User();
         UserStatistics userStatistics = new UserStatistics();
@@ -58,8 +58,15 @@ public class UserController {
         user.setLogin(login);
         user.setPassword(bCryptPasswordEncoder.encode(password));
         user.setUserStatistics(userStatisticsArrayList.get(userStatisticsArrayList.size() - 1));
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+            return Boolean.TRUE;
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return Boolean.FALSE;
     }
+
 
     // return true if cookie create (user is logged in), else return false. Front-end need this to check is user logged
     @CrossOrigin(origins="http://localhost:4200")
@@ -106,16 +113,16 @@ public class UserController {
 
 
     @CrossOrigin(origins="http://localhost:4200")
-    @GetMapping(path = "/checkUsers")
-    public @ResponseBody String checkUsers(@RequestParam String login) {
+    @PostMapping(path = "/checkUsers", value = "/checkUsers")
+    public @ResponseBody Boolean checkUsers(HttpServletResponse response, @RequestParam String login) {
         ArrayList<User> arrayListUsers = new ArrayList<>();
         arrayListUsers = (ArrayList<User>) userRepository.findAll();
         for (int i = 0; i < arrayListUsers.size(); i++) {
             if (login.equals(arrayListUsers.get(i).getLogin())) {
-                return "Login zajęty";
+                return Boolean.FALSE;
             }
         }
-        return "Login wolny";
+        return Boolean.TRUE;
     }
 
 }

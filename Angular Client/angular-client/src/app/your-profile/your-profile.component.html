@@ -1,4 +1,34 @@
 <h1>Twój profil</h1>
 
-UserId from db: {{this.authService.userId}}
+<p><b>Statystyki</b></p>
+<table class="table table-striped table-bordered ">
+  <thead>
+    <tr>
+      <th>Opis</th>
+      <th>Wartość</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bilans konta:</td>
+      <td>{{userStatistic.accountBalance}}</td>
+    </tr>
+    <tr>
+      <td>Wygranych zakładów</td>
+      <td>{{userStatistic.wonMatches}}</td>
+    </tr>
+    <tr>
+      <td>Najwyższa wygrana</td>
+      <td>{{userStatistic.biggestWin}}</td>
+    </tr>
+    <tr>
+      <td>Data najwyższej wygranej</td>
+      <td>{{userStatistic.biggestWinDate}}</td>
+    </tr>
+    <tr>
+      <td>Przegranych zakładów</td>
+      <td>{{userStatistic.lostMatches}}</td>
+    </tr>
+  </tbody>
+</table>
 

@@ -5,6 +5,7 @@ import { LeagueTableModel } from './models/leagueTableModel';
 import { MatchModel } from './models/matchModel';
 import { environment } from '../environments/environment';
 import { NgForm } from '@angular/forms';
+import { UserStatisticModel, User } from './models/userModel';
 
 
 
@@ -49,5 +50,10 @@ export class HttpService {
     const param = new HttpParams()
       .append('login', userLogin);
     return this.http.post<boolean>(this.baseURl + '/checkUsers', param);
+  }
+
+  postUserStatisticFromId(userId: string): Observable<UserStatisticModel> {
+    const param = new HttpParams().append('id', userId);
+    return this.http.post<UserStatisticModel>(this.baseURl + '/userStatisticsFromId', param);
   }
 }

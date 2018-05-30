@@ -52,18 +52,16 @@
           <a href="regulations.php" target="_blank">Regulamin</a>
         </label>
       </div> -->
+
+      <div *ngIf="checkLoginAvailability == false">
+        <div class="login-register-status">
+           Login jest zajęty
+        </div>
+      </div>
      <button type="submit" [disabled]="formData.invalid" class="btn btn btn-success">Zarejestruj się</button>
 
   </form>
 
 <br>
-<!-- <div *ngIf="registerStatus == true">
-  <div class="alert alert-success">
-    Zarejestrowano
-  </div>
-</div> -->
-<div *ngIf="checkLoginAvailability == false">
-  <div class="alert alert-warning">
-    Login jest zajęty
-  </div>
-</div>
+
+

@@ -1,0 +1,13 @@
+table {
+  width: 50%;
+  margin: 0px auto;
+  margin-top: 20px;
+}
+
+th, tr, td {
+  text-align: left;
+}
+
+h1 {
+  margin-bottom: 40px;
+}

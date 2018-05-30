@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
 
   public userId: number;
-  loginMsg: string;
+  loginStatus: boolean;
 
   constructor(private httpService: HttpService, private cookieService: CookieService, private router: Router) {
     this.checkCookieExistAndInitUserIdVariable(); // on init check cookie
@@ -29,6 +29,7 @@ export class AuthService {
         this.router.navigate(['your-profile']);
       } else {
         this.userId = null;
+        this.loginStatus = false;
       }
       console.log('userId in db: ' + this.userId);
     });
@@ -43,8 +44,5 @@ export class AuthService {
     });
   }
 
-  clearLoginMsg() {
-    this.loginMsg = null;
-  }
 
 }

@@ -24,7 +24,11 @@
 }
 
 .table {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
-
+.login-register-status {
+  margin-top: 10px;
+  color: red;
+  font-weight: bold;
+}

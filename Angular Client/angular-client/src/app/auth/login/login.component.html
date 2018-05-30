@@ -3,12 +3,17 @@
     <form (ngSubmit)="login(formData)" #formData = "ngForm">  <!--Przeslanie formukarza w lokalnej referencji formData-->
 
         Login
-        <input ngModel type="text" name="login" required>
+        <input ngModel type="text" name="login" placeholder="Pole wymagane" required minlength="1">
 
         Haslo
-        <input ngModel type="password" name="password" placeholder="enter min 3 characters" required minlength="3">
+        <input ngModel type="password" name="password" placeholder="Pole wymagane" required minlength="1">
 
       <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Zaloguj</button>
       <button type="button" class="btn btn-primary" (click)="redirectToRegister()">Rejestracja</button>
 
     </form>
+<div *ngIf="authService.loginStatus == false">
+  <div class="login-register-status">
+    Nieprawidłowe dane logowania
+  </div>
+</div>

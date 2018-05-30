@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 @Controller
@@ -15,11 +16,11 @@ public class UserStatisticsController {
     @Autowired
     private UserStatisticRepository userStatisticRepository;
 
+    @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/addUS")
     public @ResponseBody void addUserStatistics(@RequestParam int accountBalance, double biggestWin,
                                                 String biggestWinDate, int wonOrLost){
         UserStatistics userStatistics = new UserStatistics();
-
         userStatistics.setAccountBalance(accountBalance);
         userStatistics.setBiggestWin(biggestWin);
         userStatistics.setBiggestWinDate(biggestWinDate);
@@ -32,15 +33,16 @@ public class UserStatisticsController {
         userStatisticRepository.save(userStatistics);
     }
 
-
+    @CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/allUsersStatistics")
     public @ResponseBody Iterable<UserStatistics> getAllUserStatistics(){
         return userStatisticRepository.findAll();
     }
 
-    @GetMapping(path = "/userStatisticsFromId")
+    @CrossOrigin(origins="http://localhost:4200")
+    @PostMapping(path = "/userStatisticsFromId")
     public @ResponseBody
-    Optional<UserStatistics> getUserStatisticsFromId(@RequestParam long id){
+    Optional<UserStatistics> getUserStatisticsFromId( @RequestParam long id){
         return userStatisticRepository.findById(id);
     }
 }
