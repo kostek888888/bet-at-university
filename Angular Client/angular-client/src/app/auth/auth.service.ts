@@ -34,17 +34,6 @@ export class AuthService {
     });
   }
 
-  register(email: string, password: string) {
-  //   this.angularFire.auth.createUserWithEmailAndPassword(email, password)
-  //     .then(user => { // zwraca token
-  //       console.log(user);
-  //     })
-  //     .catch(err => {
-  //       this.loginMsg = err;
-  //     });
-  //
-}
-
   logout() {
     this.httpService.postLogout().subscribe(logoutStatus => {
       if (logoutStatus) {

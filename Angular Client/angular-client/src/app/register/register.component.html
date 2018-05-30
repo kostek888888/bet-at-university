@@ -1,11 +1,10 @@
 <h1>Rejestracja</h1>
 
-
 <form (ngSubmit)="register(formData)" #formData="ngForm">
       <!--Login-->
       <div class="form-group">
         <label class=" control-label" for="login">Login</label>
-          <input ngModel type="text" name="login" class="form-control"  autofocus="" placeholder="Pole wymagane" required minlength="1">
+          <input ngModel type="text" name="login" class="form-control" placeholder="Pole wymagane" required minlength="1">
       </div>
 
       <!--Hasło-->
@@ -14,14 +13,10 @@
           <input ngModel type="password" name="password"  class="form-control" placeholder="Pole wymagane" required minlength="1">
       </div>
 
-
-
-
       <!--Imie-->
       <div class="form-group">
         <label class=" control-label" for="name">Imie</label>
           <input ngModel type="text" name="name" class="form-control" placeholder="Pole wymagane" required minlength="1">
-
       </div>
 
       <!--Nazwisko-->
@@ -57,9 +52,18 @@
           <a href="regulations.php" target="_blank">Regulamin</a>
         </label>
       </div> -->
-  <button type="submit" [disabled]="formData.invalid" class="btn btn btn-success">Zarejestruj się</button>
+     <button type="submit" [disabled]="formData.invalid" class="btn btn btn-success">Zarejestruj się</button>
 
+  </form>
 
-    </form>
-
-
+<br>
+<!-- <div *ngIf="registerStatus == true">
+  <div class="alert alert-success">
+    Zarejestrowano
+  </div>
+</div> -->
+<div *ngIf="checkLoginAvailability == false">
+  <div class="alert alert-warning">
+    Login jest zajęty
+  </div>
+</div>

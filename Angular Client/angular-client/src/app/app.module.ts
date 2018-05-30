@@ -19,6 +19,7 @@ import { RegisterComponent } from './register/register.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,7 @@ import { RegisterComponent } from './register/register.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [AuthGuardService, AuthService, HttpService, CookieService],
   bootstrap: [AppComponent]

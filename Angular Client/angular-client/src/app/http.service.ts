@@ -4,6 +4,7 @@ import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { LeagueTableModel } from './models/leagueTableModel';
 import { MatchModel } from './models/matchModel';
 import { environment } from '../environments/environment';
+import { NgForm } from '@angular/forms';
 
 
 
@@ -30,5 +31,23 @@ export class HttpService {
 
   postLogout(): Observable<boolean> {
     return this.http.post<boolean>(this.baseURl + '/logOut', null, { withCredentials: true });
+  }
+
+  postRegister(formData: NgForm): Observable<boolean> {
+    const params = new HttpParams()
+      .append('login', formData.value.login)
+      .append('password', formData.value.password)
+      .append('name', formData.value.name)
+      .append('surname', formData.value.surname)
+      .append('birthDate', formData.value.birthDate)
+      .append('address', formData.value.address)
+      .append('postCode', formData.value.postCode);
+    return this.http.post<boolean>(this.baseURl + '/register', params);
+  }
+
+  checkLoginAvailability(userLogin: string): Observable<boolean> {
+    const param = new HttpParams()
+      .append('login', userLogin);
+    return this.http.post<boolean>(this.baseURl + '/checkUsers', param);
   }
 }

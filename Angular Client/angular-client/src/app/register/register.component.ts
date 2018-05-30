@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { HttpService } from '../http.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -8,20 +11,31 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-
-  constructor() { }
+  registerStatus: boolean ;
+  checkLoginAvailability: boolean;
+  constructor(private http: HttpService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() { }
 
 
   register(formData: NgForm) {
-    console.log(formData.value);
+    this.http.checkLoginAvailability(formData.value.login).subscribe(isAvailable => { // zwraca true jesli login wolny
+      if (isAvailable === true) {
+        this.http.postRegister(formData).subscribe(registerStatus => { // zwraca true jesli zarejestronwany
+          if (registerStatus) {
+            this.checkLoginAvailability = true;
+            this.registerStatus = true;
+            this.authService.login(formData.value.login, formData.value.password); // po rejestracji zaloguj
+          }
+        });
+      } else {
+        this.checkLoginAvailability = false;
+        this.registerStatus = false;
+        console.log('loginAvailable: false');
+      }
+    });
   }
 
-}
 
-class RegisterObj {
-  constructor(
 
-  ) {}
 }
