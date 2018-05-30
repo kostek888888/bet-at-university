@@ -1,2 +1,65 @@
 <h1>Rejestracja</h1>
 
+
+<form (ngSubmit)="register(formData)" #formData="ngForm">
+      <!--Login-->
+      <div class="form-group">
+        <label class=" control-label" for="login">Login</label>
+          <input ngModel type="text" name="login" class="form-control"  autofocus="" placeholder="Pole wymagane" required minlength="1">
+      </div>
+
+      <!--Hasło-->
+      <div class="form-group">
+        <label class=" control-label" for="password">Hasło</label>
+          <input ngModel type="password" name="password"  class="form-control" placeholder="Pole wymagane" required minlength="1">
+      </div>
+
+
+
+
+      <!--Imie-->
+      <div class="form-group">
+        <label class=" control-label" for="name">Imie</label>
+          <input ngModel type="text" name="name" class="form-control" placeholder="Pole wymagane" required minlength="1">
+
+      </div>
+
+      <!--Nazwisko-->
+      <div class="form-group">
+        <label class=" control-label" for="surname">Nazwisko</label>
+          <input ngModel type="text" name="surname" class="form-control" placeholder="Pole wymagane" required minlength="1">
+      </div>
+
+      <!--Email-->
+      <div class="form-group">
+        <label class=" control-label" for="birthDate">Data urodzenia</label>
+          <input ngModel type="date" name="birthDate" class="form-control" placeholder="Pole wymagane" required minlength="1">
+      </div>
+
+      <!--Adres-->
+      <div class="form-group">
+        <label class=" control-label" for="address">Adres</label>
+          <input ngModel type="text" name="address" class="form-control" placeholder="Pole wymagane" required minlength="1">
+      </div>
+
+      <!--Kod pocztowy-->
+      <div class="form-group">
+        <label class=" control-label" for="postCode">Kod pocztowy</label>
+          <input ngModel type="text" name="postCode" class="form-control" placeholder="Pole wymagane" required minlength="1" maxlength="6">
+      </div>
+
+
+      <!-- Warunki
+      <div class="col-sm-12 form-check">
+        <input class="form-check-input" ngModel type="checkbox" value="" name="acptChectbox""">
+        <label class="form-check-label" for="acptChectbox">
+          Akceptuje
+          <a href="regulations.php" target="_blank">Regulamin</a>
+        </label>
+      </div> -->
+  <button type="submit" [disabled]="formData.invalid" class="btn btn btn-success">Zarejestruj się</button>
+
+
+    </form>
+
+

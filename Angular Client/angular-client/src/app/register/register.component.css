@@ -1,0 +1,12 @@
+form {
+  margin-top: 35px;
+  display: grid;
+  grid-template-columns: 300px;
+  grid-gap: 16px;
+  justify-content: center;
+  text-align: center;
+}
+
+button {
+  margin-top: 15px;
+}

@@ -1,10 +1,9 @@
 <h1>Logowanie</h1>
 
-  <div class="loginForm">
     <form (ngSubmit)="login(formData)" #formData = "ngForm">  <!--Przeslanie formukarza w lokalnej referencji formData-->
 
         Login
-        <input ngModel type="email" name="email" required> <!-- ngModel niebindowane, te pole email bedzie sie znajdowalo w zm formData-->
+        <input ngModel type="text" name="login" required>
 
         Haslo
         <input ngModel type="password" name="password" placeholder="enter min 3 characters" required minlength="3">
@@ -13,4 +12,3 @@
       <button type="button" class="btn btn-primary" (click)="redirectToRegister()">Rejestracja</button>
 
     </form>
-  </div>

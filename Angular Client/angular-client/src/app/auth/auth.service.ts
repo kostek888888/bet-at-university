@@ -22,7 +22,6 @@ export class AuthService {
      }
    }
 
-   // zadanie logowania zwraca true jesli zalogowany lub false jesli nie
   login(login: string, password: string) {
     this.httpService.postLogin(login, password).subscribe(cookieCreateStatus => {
       if (cookieCreateStatus) {
