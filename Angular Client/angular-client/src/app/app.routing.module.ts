@@ -8,6 +8,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { LoginComponent } from './auth/login/login.component';
 import { LeagueTableComponent } from './league-table/league-table.component';
 import { RegisterComponent } from './register/register.component';
+import { BetsHistoryComponent } from './your-profile/bets-history/bets-history.component';
 
 const appRoutes: Routes = [
   {
@@ -30,6 +31,11 @@ const appRoutes: Routes = [
   {
     path: 'your-profile',
     component: YourProfileComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'your-profile/bets-history',
+    component: BetsHistoryComponent,
     canActivate: [AuthGuardService]
   },
   {

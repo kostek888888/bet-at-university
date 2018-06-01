@@ -1,0 +1,40 @@
+# instructions: Copy and rename this file to application.properties
+# and then fill in login and password if they were changed from default.
+# File should be placed in the same place as this file
+# DO NOT REMOVE THIS FILE it would remove it from repository on commit.
+
+server.port=8080
+# https://www.mkyong.com/spring-boot/spring-boot-spring-data-jpa-oracle-example/
+# create and drop tables and sequences, loads import.sql
+spring.jpa.hibernate.ddl-auto=update
+# to update only but it needs drop after adding inserts
+# spring.jpa.hibernate.ddl-auto=update
+
+# Database settings
+spring.datasource.url=jdbc:mariadb://localhost:3306/bet_at_university?useLegacyDatetimeCode=false&serverTimezone=UTC
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MariaDBDialect
+
+hibernate.show_sql=true
+spring.jpa.properties.hibernate.use_sql_comments=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# hibernate.globally_quoted_identifiers=true
+# spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+spring.datasource.username=root
+spring.datasource.password=
+# spring.datasource.driver-class-oracle.jdbc.driver.OracleDriver
+
+spring.datasource.hikari.connection-timeout=60000
+spring.datasource.hikari.maximum-pool-size=5
+
+# logging
+#logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+logging.level.org.hibernate.SQL=debug
+# logging.level.org.hibernate.type.descriptor.sql=trace
+logging.level.=error
+
+spring.thymeleaf.cache=false
+spring.thymeleaf.mode=LEGACYHTML5
+

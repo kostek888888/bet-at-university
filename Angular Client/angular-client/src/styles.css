@@ -10,21 +10,12 @@
 }
 
 .container{
-   padding: 3rem 1.5rem;
-
+  padding: 3rem 1.5rem;
 }
 
-.siteTitle{
-  text-align: center;
-  padding-bottom: 30px;
-}
 
 .cookies-alert {
   font-size: 12px;
-}
-
-.table {
-  margin-top: 20px;
 }
 
 .login-register-status {
@@ -32,3 +23,4 @@
   color: red;
   font-weight: bold;
 }
+

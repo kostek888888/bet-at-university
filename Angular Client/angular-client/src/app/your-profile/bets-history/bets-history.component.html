@@ -1,0 +1,58 @@
+<h1>Historia zakładów</h1>
+
+
+<form (ngSubmit)="getSearchBets()">
+
+  <div class="form-group row">
+    <div class="col-6">
+      <input [(ngModel)]="formObj.searchText" class="form-control" type="text" name="search" required="" placeholder="Wyszukaj">
+    </div>
+
+    <div class="col-4">
+      <select [(ngModel)]="formObj.filter" class="form-control" name="search_filter">
+        <option value="noFilter">Wszystkie zakłady</option>
+        <option value="searchByDay">Data od "YYYY/MM/DD"</option>
+        <option value="searchByTeamName">Nazwa drużyny</option>
+        <option value="searchWon">Wygrane</option>
+        <option value="searchLost">Przegrane</option>
+      </select>
+    </div>
+
+    <div class="col-2">
+      <button type="submit" class="btn btn-primary form-control">Szukaj</button>
+    </div>
+  </div>
+
+</form>
+<br>
+<br>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Drużyny </th>
+      <th>Data meczu</th>
+      <th>Kursy</th>
+      <th>Typ zakładu</th>
+      <th>Kwota zakładu</th>
+      <th>Przewidywana wygrana</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <!-- <tr *ngFor="let elem of matchesArray"> -->
+      <td>Gospodarz: Manchester United FC
+        <br> Goście: West Ham United FC
+      </td>
+      <td>Wygrana gości: 2</td>
+      <td>2018/02/28</td>
+      <td> Wygrana gości </td>
+      <td>221 PLN</td>
+      <td>442 PLN</td>
+      <td>Wygrana</td>
+    </tr>
+  </tbody>
+</table>
+

@@ -11,3 +11,39 @@ th, tr, td {
 h1 {
   margin-bottom: 40px;
 }
+
+.bets-table table{
+  width: 100%;
+  margin: 0px auto;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  font-size: 11px;
+}
+
+.bets-table p {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.bets-table .bet-table-thead {
+  background-color: #ededed;
+}
+
+.bets-history {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+#increase-the-amount-btn {
+  margin-left: 30px;
+}
+
+.current-bets-table table {
+  width: 100%;
+  margin: 0px auto;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+

@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoginComponent } from './auth/login/login.component';
 import { LeagueTableComponent } from './league-table/league-table.component';
 import { RegisterComponent } from './register/register.component';
+import { BetsHistoryComponent } from './your-profile/bets-history/bets-history.component';
 
 
 
@@ -29,7 +30,8 @@ import { RegisterComponent } from './register/register.component';
     PageNotFoundComponent,
     LoginComponent,
     LeagueTableComponent,
-    RegisterComponent
+    RegisterComponent,
+    BetsHistoryComponent
   ],
   imports: [
     BrowserModule,

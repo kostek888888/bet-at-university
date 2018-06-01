@@ -11,17 +11,23 @@ import { HttpService } from '../http.service';
 export class YourProfileComponent implements OnInit {
 
   userStatistic: UserStatisticModel;
-  constructor(public authservice: AuthService, private http: HttpService) { }
+  constructor(public authservice: AuthService, private http: HttpService) {
+    this.getUserStatistic();
+   }
 
   ngOnInit() {
-    this.getUserStatistic();
-    console.log(this.userStatistic);
+
   }
 
   getUserStatistic() {
     this.http.postUserStatisticFromId(this.authservice.userId.toString()).subscribe(userStatisticObj => {
       this.userStatistic = Convert.toUserStatisticModel(JSON.stringify(userStatisticObj));
+      console.log(this.userStatistic);
     });
   }
 
+  increaseAccountBalance() {
+    this.userStatistic.accountBalance = this.userStatistic.accountBalance + 500;
+    console.log(this.userStatistic);
+  }
 }
