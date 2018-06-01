@@ -50,53 +50,59 @@ public class BetController {
     String betMatch(@RequestParam long matchId, @RequestParam long userId, @RequestParam String betType,
                     @RequestParam double moneyInserted) {
         Bet bet = new Bet();
+        UserStatistics userStatistics = new UserStatistics();
         matchArrayList = (ArrayList<Match>) matchRepository.findAll();
         userArrayList = (ArrayList<User>) userRepository.findAll();
         betRateArrayList = (ArrayList<BetRate>) betRateRepository.findAll();
         SimpleDateFormat actualDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date actualDate = new Date();
 
-        bet.setMatches(matchArrayList.get((int) matchId - 1));
-        bet.setUser(userArrayList.get((int) userId - 1));
-        bet.setMoneyInserted(moneyInserted);
-        bet.setBetRate(betRateArrayList.get((int) matchId - 1));
+            bet.setMatches(matchArrayList.get((int) matchId - 1));
+            bet.setUser(userArrayList.get((int) userId - 1));
+            bet.setMoneyInserted(moneyInserted);
+            bet.setBetRate(betRateArrayList.get((int) matchId - 1));
 
-        switch (betType) {
-            case "1":
-                bet.setBetType("1");
-                bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getHomeTeamWinRate()));
-                break;
 
-            case "2":
-                bet.setBetType("2");
-                bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getAwayTeamWinRate()));
-                break;
+            switch (betType) {
+                case "1":
+                    bet.setBetType("1");
+                    bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getHomeTeamWinRate()));
+                    break;
 
-            case "X":
-                bet.setBetType("X");
-                bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getDrawRate()));
-                break;
+                case "2":
+                    bet.setBetType("2");
+                    bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getAwayTeamWinRate()));
+                    break;
 
-            case "1X":
-                bet.setBetType("1X");
-                bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getHomeTeamWinOrDrawRate()));
-                break;
+                case "X":
+                    bet.setBetType("X");
+                    bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getDrawRate()));
+                    break;
 
-            case "2X":
-                bet.setBetType("2X");
-                bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getAwayTeamWinOrDrawRate()));
-                break;
+                case "1X":
+                    bet.setBetType("1X");
+                    bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getHomeTeamWinOrDrawRate()));
+                    break;
 
-            case "12":
-                bet.setBetType("12");
-                bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getHomeWinOrAwayWin()));
-                break;
-        }
-        bet.setBuyDateAndTime(actualDate.toString());
-        bet.setBetResult(2);
-        betRepository.save(bet);
+                case "2X":
+                    bet.setBetType("2X");
+                    bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getAwayTeamWinOrDrawRate()));
+                    break;
 
-        return "add bet";
+                case "12":
+                    bet.setBetType("12");
+                    bet.setAmountToPaidOut(amountToPaidOutWithTax(moneyInserted, bet.getBetRate().getHomeWinOrAwayWin()));
+                    break;
+            }
+            bet.setBuyDateAndTime(actualDate.toString());
+            bet.setBetResult(2);
+            userStatistics.setAccountBalance(userArrayList.get((int) userId-1).getUserStatistics().getAccountBalance()-moneyInserted);
+
+            userStatisticRepository.save(userStatistics);
+            betRepository.save(bet);
+
+
+            return "add bet";
     }
 
     public double amountToPaidOutWithTax(double moneyInserted, double betRate) {

@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/")
 public class UserStatisticsController {
+    private ArrayList<UserStatistics> userStatisticsArrayList = new ArrayList<>();
 
     @Autowired
     private UserStatisticRepository userStatisticRepository;
@@ -28,5 +30,28 @@ public class UserStatisticsController {
     public @ResponseBody
     Optional<UserStatistics> getUserStatisticsFromId( @RequestParam long id){
         return userStatisticRepository.findById(id);
+    }
+
+
+    @CrossOrigin(origins="http://localhost:4200")
+    @PostMapping(path = "/checkAccountBalance")
+    public @ResponseBody double checkAccountBalance(@RequestParam long userId){
+        userStatisticsArrayList = (ArrayList<UserStatistics>) userStatisticRepository.findAll();
+        return userStatisticsArrayList.get((int) userId-1).getAccountBalance();
+    }
+
+    @CrossOrigin(origins="http://localhost:4200")
+    @PostMapping(path = "/pay")
+    public @ResponseBody String pay(@RequestParam long userId, @RequestParam double money){
+        UserStatistics userStatistics = new UserStatistics();
+        userStatisticsArrayList = (ArrayList<UserStatistics>) userStatisticRepository.findAll();
+        userStatistics.setId(userId);
+        userStatistics.setAccountBalance(userStatisticsArrayList.get((int) userId-1).getAccountBalance() + money);
+        userStatistics.setWonMatches(userStatisticsArrayList.get((int) userId-1).getWonMatches());
+        userStatistics.setLostMatches(userStatisticsArrayList.get((int) userId-1).getLostMatches());
+        userStatistics.setBiggestWinDate(userStatisticsArrayList.get((int) userId-1).getBiggestWinDate());
+        userStatistics.setBiggestWin(userStatisticsArrayList.get((int) userId-1).getBiggestWin());
+        userStatisticRepository.save(userStatistics);
+        return "added";
     }
 }
