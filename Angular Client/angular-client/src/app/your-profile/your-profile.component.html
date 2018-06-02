@@ -10,8 +10,8 @@
   </thead>
   <tbody>
     <tr>
-      <td>Bilans konta:</td>
-      <td>{{userStatistic?.accountBalance}} PLN <button type="submit" (click)="increaseAccountBalance()" id="increase-the-amount-btn" class="btn btn-primary btn-sm">Zwiększ kwote</button> // tu strona do paypal</td>
+      <td>Bilans konta:</td>                <!--number: 'min licz. min_po_przec-max_po_przec' -->
+      <td>{{userStatistic?.accountBalance | number : '1.2-2'}} PLN <button type="submit" (click)="increaseAccountBalance()" id="increase-the-amount-btn" class="btn btn-primary btn-sm">Zwiększ kwote</button> // tu strona do paypal</td>
     </tr>
     <tr>
       <td>Wygranych zakładów</td>
@@ -19,11 +19,11 @@
     </tr>
     <tr>
       <td>Najwyższa wygrana</td>
-      <td>{{userStatistic?.biggestWin}}</td>
+      <td>{{userStatistic?.biggestWin}} PLN</td>
     </tr>
     <tr>
       <td>Data najwyższej wygranej</td>
-      <td>{{userStatistic?.biggestWinDate}}</td>
+      <td>{{userStatistic?.biggestWinDate | date: "yyyy/MM/dd HH:mm"}}</td>
     </tr>
     <tr>
       <td>Przegranych zakładów</td>
@@ -33,7 +33,7 @@
 </table>
 
 <div class="bets-history">
-  <button type="submit" class="btn btn-primary btn-sm" routerLink="bets-history">Historia zakładów</button>
+  <button type="submit" class="btn btn-primary btn" routerLink="bets-history">Historia zakładów</button>
 </div>
 
 <div class="current-bets-table">
@@ -43,98 +43,75 @@
       <tr>
         <th>Drużyny </th>
         <th>Data meczu</th>
-        <th>Kursy</th>
-        <th>Typ zakładu</th>
+        <th>Typ zakładu i kurs</th>
+
+        <th>Data zakładu</th>
         <th>Kwota zakładu</th>
         <th>Przewidywana wygrana</th>
-        <th>Status</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr>
-      <!-- <tr *ngFor="let elem of matchesArray"> -->
-        <td>Gospodarz: <b>Manchester United FC</b> <br> Goście: <b>West Ham United FC</b> </td>
-        <td>Wygrana gości: <b>2</b></td>
-        <td><b>2018/02/28</b></td>
-        <td><b>Wygrana gości</b></td>
-        <td><b>2137 PLN</b></td>
-        <td><b>4274 PLN</b></td>
-        <td><b>W trakcie</b></td>
+      <tr *ngFor="let bet of activeBetsArray">
+        <td>Gospodarz: {{bet.matches.homeTeamId.name}} <br> Goście: {{bet.matches.awayTeamId.name}} </td>
+        <td>{{bet.matches.matchDateAndTime | date: "yyyy/MM/dd"}}</td>
+        <td>{{parseBetTypeToString(bet.betType)}} {{getBetRateToTable(bet.betType, bet.id)}}</td>
+        <td>{{bet.buyDateAndTime | date: "yyyy/MM/dd HH:dd"}}</td>
+        <td>{{bet.moneyInserted}}PLN</td>
+        <td>{{bet.amountToPaidOut}}PLN</td>
       </tr>
     </tbody>
   </table>
 </div>
-
-
 
 <div class="bets-table">
   <p><b>Dostępne zakłady</b></p>
   <table class="table table-bordered table-hover">
     <thead class="bet-table-thead">
       <tr>
-        <th>Drużyny </th>
+        <th>Drużyny</th>
         <th>Data meczu</th>
         <th>Kursy</th>
         <th>Typ zakładu</th>
         <th>Kwota zakładu</th>
-        <th>Przewidywana wygrana</th>
         <th>Akcja</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr>
-      <!-- <tr *ngFor="let elem of matchesArray"> -->
-        <td>Gospodarz: <b>Manchester United FC</b> <br> Goście: <b>West Ham United FC</b> </td>
+      <tr *ngFor="let match of matchesToBetArray; let i=index">
 
-        <td><b>2018/02/28</b></td>
+          <input type="hidden" value={{match.id}} #matchId>
+          <td>Gospodarz: <b>{{match.homeTeamId.name}}</b> <br> Goście: <b>{{match.awayTeamId.name}}</b> </td>
 
-        <td>Wygrana gospodarzy: <b>2</b>
-          <br>Wygrana gości: <b>2</b>
-          <br>Remis: <b>2</b>
-          <br> Wygrana gosp. lub remis: <b>2</b>
-          <br> Wygrana gości lub remis: <b>2</b>
-          <br> Wygrana gosp. lub gości: <b>221</b>
-        </td>
+          <td><b>{{match.matchDateAndTime | date: "yyyy/MM/dd"}}</b></td>
 
-        <!-- Radios wypisac to ngforem -->
-        <td>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="betType">Wygrana gospodarzy
-              </label>
-            </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="betType">Wygrana gości
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="betType" >Remis
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="betType" >Wygrana gosp. lub remis
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="betType" >Wygrana gości lub remis
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="betType" >Wygrana gosp. lub gości
-              </label>
-            </div>
-        </td>
-        <td><input type="text"  name=moneyInsertInput> PLN</td>
-        <td>//Zmiana pod wplywem <br> kursu i wplaconej <br> kwoty <br> wylicza front</td>
-        <td><button type="submit" class="btn btn-primary btn-sm">Obstaw</button></td>
-      </tr>
+          <td>Wygrana gospodarzy: <b>{{betsRatesArray[i].homeTeamWinRate}}</b>
+            <br>Wygrana gości: <b>{{betsRatesArray[i].awayTeamWinRate}}</b>
+            <br>Remis: <b>{{betsRatesArray[i].drawRate}}</b>
+            <br> Wygrana gosp. lub remis: <b>{{betsRatesArray[i].homeTeamWinOrDrawRate}}</b>
+            <br> Wygrana gości lub remis: <b>{{betsRatesArray[i].awayTeamWinOrDrawRate}}</b>
+            <br> Wygrana gosp. lub gości: <b>{{betsRatesArray[i].homeWinOrAwayWin}}</b>
+          </td>
+
+          <td>
+              <select #betType>
+                <option value="1">Wygrana gospodarzy</option>
+                <option value="2">Wygrana gości</option>
+                <option value="X">Remis</option>
+                <option value="1X">Wygrana gosp. lub remis</option>
+                <option value="2X">Wygrana gości lub remis</option>
+                <option value="12">Wygrana gosp. lub gości</option>
+              </select>
+          </td>
+          <td><input type="number" #moneyInsertInput required value=1 min=1 max={{userStatistic.accountBalance}}> PLN</td>
+<td>
+<button type="submit" class="btn btn-primary btn-sm" (click)="betMatch(matchId.value, betType.value, moneyInsertInput.value)">Obstaw</button>
+
+</td>
+
+
+       </tr>
     </tbody>
   </table>
 </div>

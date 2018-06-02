@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { MatchModel, Convert } from '../models/matchModel';
+import { MatchModel, ConvertMatchModel } from '../models/matchModel';
 
 @Component({
   selector: 'app-games-results',
@@ -22,7 +22,7 @@ export class GamesResultsComponent implements OnInit {
   getFirstFiveMatches() {
     // print only 5 newest matches in table when page init
     this.httpService.getMatch().subscribe(response => {
-      this.matchesArray = Convert.toMatchModel(JSON.stringify(response));
+      this.matchesArray = ConvertMatchModel.toMatchModel(JSON.stringify(response));
       if (this.matchesArray.length >= 5) {
         this.matchesArray = this.matchesArray.slice(0, 5);
       }
@@ -33,19 +33,19 @@ export class GamesResultsComponent implements OnInit {
   getSearchResult() {
     if (this.formObj.filter === 'noFilter') {
       this.httpService.getMatch().subscribe(response => {
-        this.matchesArray = Convert.toMatchModel(JSON.stringify(response));
+        this.matchesArray = ConvertMatchModel.toMatchModel(JSON.stringify(response));
         this.matchesArray = this.sortMatchesByDate(this.matchesArray);
       });
     } else if (this.formObj.filter === 'searchByDay') {
       this.httpService.getMatch().subscribe(response => {
-        this.matchesArray = Convert.toMatchModel(JSON.stringify(response));
+        this.matchesArray = ConvertMatchModel.toMatchModel(JSON.stringify(response));
         // fitrowanie po dacie
         this.matchesArray = this.matchesArray.filter(item => item.matchDateAndTime >= this.formObj.searchText);
         this.matchesArray = this.sortMatchesByDate(this.matchesArray);
       });
     } else if (this.formObj.filter === 'searchByTeamName') {
         this.httpService.getMatch().subscribe(response => {
-          this.matchesArray = Convert.toMatchModel(JSON.stringify(response));
+          this.matchesArray = ConvertMatchModel.toMatchModel(JSON.stringify(response));
         // fitrowanie po nazwie druzyny
           this.matchesArray = this.matchesArray.filter(item =>
             item.homeTeamId.name === this.formObj.searchText || item.awayTeamId.name === this.formObj.searchText

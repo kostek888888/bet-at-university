@@ -42,7 +42,7 @@ public class UserStatisticsController {
 
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/pay")
-    public @ResponseBody String pay(@RequestParam long userId, @RequestParam double money){
+    public @ResponseBody  Optional<UserStatistics> pay(@RequestParam long userId, @RequestParam double money){
         UserStatistics userStatistics = new UserStatistics();
         userStatisticsArrayList = (ArrayList<UserStatistics>) userStatisticRepository.findAll();
         userStatistics.setId(userId);
@@ -52,6 +52,6 @@ public class UserStatisticsController {
         userStatistics.setBiggestWinDate(userStatisticsArrayList.get((int) userId-1).getBiggestWinDate());
         userStatistics.setBiggestWin(userStatisticsArrayList.get((int) userId-1).getBiggestWin());
         userStatisticRepository.save(userStatistics);
-        return "added";
+        return userStatisticRepository.findById(userId);
     }
 }

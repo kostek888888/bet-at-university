@@ -6,6 +6,9 @@ import { MatchModel } from './models/matchModel';
 import { environment } from '../environments/environment';
 import { NgForm } from '@angular/forms';
 import { UserStatisticModel, User } from './models/userModel';
+import { BetsRatesModel } from './models/betsRatesModel';
+import { AuthService } from './auth/auth.service';
+import { BetModel } from './models/betModel';
 
 
 
@@ -21,6 +24,14 @@ export class HttpService {
 
   getMatch(): Observable<MatchModel> {
     return this.http.get<MatchModel>( this.baseURl + '/match');
+  }
+
+  getMatchToBetHttpService(): Observable<MatchModel> {
+    return this.http.get<MatchModel>(this.baseURl + '/matchToBet');
+  }
+
+  getBetsRatesHttpService(): Observable<BetsRatesModel> {
+    return this.http.get<BetsRatesModel>(this.baseURl + '/betRate');
   }
 
   postLogin(login_param: string, password_param: string): Observable<boolean> {
@@ -55,5 +66,25 @@ export class HttpService {
   postUserStatisticFromId(userId: string): Observable<UserStatisticModel> {
     const param = new HttpParams().append('id', userId);
     return this.http.post<UserStatisticModel>(this.baseURl + '/userStatisticsFromId', param);
+  }
+
+  postIncreaseAccountBalance(userId: string, money: string): Observable<UserStatisticModel> {
+    const params = new HttpParams().append('userId', userId)
+                                   .append('money', money);
+    return this.http.post<UserStatisticModel>(this.baseURl + '/pay', params);
+  }
+
+  postBetMatch(matchId: string, userId: string, betType: string, moneyInserted: string): Observable<boolean> {
+    const params = new HttpParams()
+      .append('matchId', matchId)
+      .append('userId', userId)
+      .append('betType', betType)
+      .append('moneyInserted', moneyInserted);
+    return this.http.post<boolean>(this.baseURl + '/betMatch', params);
+  }
+
+  postActiveBets(userId: string): Observable<BetModel> {
+    const params = new HttpParams().append('userId', userId);
+    return this.http.post<BetModel>(this.baseURl + '/userBet', params);
   }
 }

@@ -32,11 +32,13 @@ public class MatchController {
     @GetMapping(path = "/matchToBet")
     public @ResponseBody ArrayList<Match> getAllMatchesToBet(){
         matchArrayList = (ArrayList<Match>) matchRepository.findAll();
+        matchToBetArrayList.clear();
         for(int i =0; i < matchArrayList.size(); i++){
             if(matchArrayList.get(i).getAwayTeamScore() < 0){
                 matchToBetArrayList.add(matchArrayList.get(i));
             }
         }
+        System.out.print(matchToBetArrayList.size());
         return matchToBetArrayList;
     }
 

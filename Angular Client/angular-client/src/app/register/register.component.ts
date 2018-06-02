@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
           if (registerStatus) {
             this.checkLoginAvailability = true;
             this.registerStatus = true;
-            this.authService.login(formData.value.login, formData.value.password); // po rejestracji zaloguj
+           this.router.navigate(['login']);
           }
         });
       } else {

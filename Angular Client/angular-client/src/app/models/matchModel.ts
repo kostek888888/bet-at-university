@@ -36,7 +36,7 @@ export enum LeagueName {
 }
 
 // Converts JSON strings to/from your types
-export namespace Convert {
+export namespace ConvertMatchModel {
   export function toMatchModel(json: string): MatchModel[] {
     return JSON.parse(json);
   }

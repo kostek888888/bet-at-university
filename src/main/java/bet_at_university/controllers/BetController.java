@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 
 @Controller
@@ -47,10 +49,11 @@ public class BetController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "/betMatch")
     public @ResponseBody
-    String betMatch(@RequestParam long matchId, @RequestParam long userId, @RequestParam String betType,
+    Boolean betMatch(@RequestParam long matchId, @RequestParam long userId, @RequestParam String betType,
                     @RequestParam double moneyInserted) {
         Bet bet = new Bet();
         UserStatistics userStatistics = new UserStatistics();
+        userStatistics.setId(userId);
         matchArrayList = (ArrayList<Match>) matchRepository.findAll();
         userArrayList = (ArrayList<User>) userRepository.findAll();
         betRateArrayList = (ArrayList<BetRate>) betRateRepository.findAll();
@@ -98,15 +101,16 @@ public class BetController {
             bet.setBetResult(2);
             userStatistics.setAccountBalance(userArrayList.get((int) userId-1).getUserStatistics().getAccountBalance()-moneyInserted);
 
+
             userStatisticRepository.save(userStatistics);
             betRepository.save(bet);
 
 
-            return "add bet";
+            return Boolean.TRUE ;
     }
 
     public double amountToPaidOutWithTax(double moneyInserted, double betRate) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.##"); // "." for linux!!!
+        DecimalFormat decimalFormat = new DecimalFormat("#.##" , new DecimalFormatSymbols(Locale.UK));; // del sec param for linux!!!
         decimalFormat.setRoundingMode(RoundingMode.CEILING);
         return Double.parseDouble(decimalFormat.format(moneyInserted * betRate - (0.12 * moneyInserted * betRate)));
     }
@@ -115,6 +119,7 @@ public class BetController {
     @PostMapping(path = "/userBet")
     public @ResponseBody
     ArrayList<Bet> userBet(@RequestParam long userId) {
+        userBetArrayList.clear();
         betArrayList = (ArrayList<Bet>) betRepository.findAll();
         for (int i = 0; i < betArrayList.size(); i++) {
             if (betArrayList.get(i).getUser().getId() == userId) {
@@ -123,6 +128,7 @@ public class BetController {
         }
         return userBetArrayList;
     }
+
 
     @Scheduled(cron = "* 0/30 * * * ?")
     public void checkBet() {

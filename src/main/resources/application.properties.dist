@@ -8,7 +8,7 @@ server.port=8080
 # create and drop tables and sequences, loads import.sql
 spring.jpa.hibernate.ddl-auto=update
 # to update only but it needs drop after adding inserts
-# spring.jpa.hibernate.ddl-auto=update
+# spring.jpa.hibernate.ddl-auto=cre
 
 # Database settings
 spring.datasource.url=jdbc:mariadb://localhost:3306/bet_at_university?useLegacyDatetimeCode=false&serverTimezone=UTC
