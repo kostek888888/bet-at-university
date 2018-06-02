@@ -21,13 +21,27 @@ import java.util.Random;
 public class MatchController {
     private Match match = new Match();
     private Random random = new Random();
+    private ArrayList<Match> matchArrayList = new ArrayList<>();
+    private ArrayList<Match> matchToBetArrayList = new ArrayList<>();
 
 
     @Autowired
     private MatchRepository matchRepository;
 
     @CrossOrigin(origins="http://localhost:4200")
-    @GetMapping(path = "/match")
+    @GetMapping(path = "/matchToBet")
+    public @ResponseBody ArrayList<Match> getAllMatchesToBet(){
+        matchArrayList = (ArrayList<Match>) matchRepository.findAll();
+        for(int i =0; i < matchArrayList.size(); i++){
+            if(matchArrayList.get(i).getAwayTeamScore() < 0){
+                matchToBetArrayList.add(matchArrayList.get(i));
+            }
+        }
+        return matchToBetArrayList;
+    }
+
+    @CrossOrigin(origins="http://localhost:4200")
+    @GetMapping(path = "/allMatches")
     public @ResponseBody Iterable<Match> getAllMatches(){
         return matchRepository.findAll();
     }
@@ -39,7 +53,7 @@ public class MatchController {
         return matchRepository.findById((long) id);
     }
 
-    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0 0/14 * * * ?")
     public void updateMatchScore(){
         SimpleDateFormat actualDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date actualDate = new Date();
