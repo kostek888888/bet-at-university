@@ -30,7 +30,7 @@ public class MatchData {
             Date matchDate = null;
             try {
                 matchDate = matchDateFormat.parse("2018/"+addZeroToDate(random.nextInt(11)+1)+"/"+addZeroToDate(random.nextInt(30)+1)+" 09:"+i+"1");
-//                matchDate = matchDateFormat.parse("2018/05/31 11:"+i+""+i);
+//                matchDate = matchDateFormat.parse("2018/06/01 22:3"+2*i);
             } catch (ParseException e) {
                 e.printStackTrace();
             }

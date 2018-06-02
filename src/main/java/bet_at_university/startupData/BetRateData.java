@@ -46,7 +46,7 @@ public class BetRateData {
     public ArrayList<Double> calculateRate(int homeWon, int homeLost, int homeDraw, int awayWon, int awayLost, int awayDraw){
 
 
-        DecimalFormat decimalFormat = new DecimalFormat("#,##"); // "." for linux!!!
+        DecimalFormat decimalFormat = new DecimalFormat("#.##"); // "." for linux!!!
         decimalFormat.setRoundingMode(RoundingMode.CEILING);
 
         double homeWonRate = 4-(0.1*(homeWon+homeLost)/2);
