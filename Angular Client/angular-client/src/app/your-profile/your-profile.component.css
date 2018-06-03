@@ -46,4 +46,11 @@ h1 {
   font-size: 13px;
 }
 
+#withdrawBtn {
+  margin-left: 15px;
+}
+
+#withdrawMsg {
+  margin-left: 15px;
+}
 

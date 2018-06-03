@@ -87,4 +87,9 @@ export class HttpService {
     const params = new HttpParams().append('userId', userId);
     return this.http.post<BetModel>(this.baseURl + '/userBet', params);
   }
+
+  postWithdrawMoney(userId: string, money: string): Observable<UserStatisticModel> {
+    const params = new HttpParams().append('userId', userId).append('money', money);
+    return this.http.post<UserStatisticModel>(this.baseURl + '/withdrawal', params);
+  }
 }

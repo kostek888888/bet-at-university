@@ -17,7 +17,7 @@ export interface UserStatisticModel {
 }
 
 // Converts JSON strings to/from your types
-export namespace Convert {
+export namespace ConvertToUserStatistic {
   export function toUserStatisticModel(json: string): UserStatisticModel {
     return JSON.parse(json);
   }

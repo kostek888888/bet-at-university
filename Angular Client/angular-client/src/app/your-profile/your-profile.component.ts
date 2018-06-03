@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { UserStatisticModel, Convert } from '../models/userModel';
+import { UserStatisticModel, ConvertToUserStatistic } from '../models/userModel';
 import { HttpService } from '../http.service';
 import { MatchModel, ConvertMatchModel } from '../models/matchModel';
 import { BetsRatesModel, ConvertBetsRateModel } from '../models/betsRatesModel';
@@ -18,6 +18,7 @@ export class YourProfileComponent implements OnInit {
   betsRatesArray: Array<BetsRatesModel>;
   activeBetsArray: Array<BetModel>;
   betStatusInfo: boolean;
+  withdrawMsg = '';
   constructor(public authservice: AuthService, private http: HttpService) {
     this.getBetsRates();
     this.getUserStatistic();
@@ -31,7 +32,7 @@ export class YourProfileComponent implements OnInit {
 
   getUserStatistic() {
     this.http.postUserStatisticFromId(this.authservice.userId.toString()).subscribe(userStatisticObj => {
-      this.userStatistic = Convert.toUserStatisticModel(JSON.stringify(userStatisticObj));
+      this.userStatistic = ConvertToUserStatistic.toUserStatisticModel(JSON.stringify(userStatisticObj));
     });
   }
 
@@ -69,7 +70,22 @@ export class YourProfileComponent implements OnInit {
   getActiveBets() {
     this.http.postActiveBets(this.authservice.userId.toString()).subscribe(activeBetsArrayResp => {
       this.activeBetsArray = ConvertBetModel.toBetModel(JSON.stringify(activeBetsArrayResp));
+      this.activeBetsArray = this.activeBetsArray.filter(bet => bet.betResult === 2);
     });
+  }
+
+  withdrawMoney(money: string) {
+    if (parseFloat(money) <= 0.0) {
+      this.withdrawMsg = 'Wpisz kwotę >= 1.0';
+    } else if (parseFloat(money) <= this.userStatistic.accountBalance ) {
+      this.http.postWithdrawMoney(this.authservice.userId.toString(), money).subscribe(userStatisticResp => {
+        this.userStatistic = ConvertToUserStatistic.toUserStatisticModel(JSON.stringify(userStatisticResp));
+        console.log('wypłacono ' + money);
+      });
+      this.withdrawMsg = '';
+    } else {
+      this.withdrawMsg = 'Nie masz tyle pieniędzy';
+    }
   }
 
   getBetRateToTable(betType: string, betId: string): string {

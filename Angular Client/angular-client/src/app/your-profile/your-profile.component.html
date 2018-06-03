@@ -13,6 +13,14 @@
       <td>Bilans konta:</td>                <!--number: 'min licz. min_po_przec-max_po_przec' -->
       <td>{{userStatistic?.accountBalance | number : '1.2-2'}} PLN <button type="submit" (click)="increaseAccountBalance()" id="increase-the-amount-btn" class="btn btn-primary btn-sm">Zwiększ kwote</button> // tu strona do paypal</td>
     </tr>
+     <tr>
+      <td>Wypłać pieniądze z konta</td>
+      <td>
+        <input type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" #moneyWithdrawInput required value=1.0 min=1.0
+          max={{userStatistic.accountBalance}}>PLN
+        <button id="withdrawBtn" type="submit" class="btn btn-primary btn-sm" (click) = "withdrawMoney(moneyWithdrawInput.value)">Wypłać</button> <div id="withdrwaMsg"> {{withdrawMsg}} </div>
+      </td>
+    </tr>
     <tr>
       <td>Wygranych zakładów</td>
       <td>{{userStatistic?.wonMatches}}</td>
@@ -44,7 +52,6 @@
         <th>Drużyny </th>
         <th>Data meczu</th>
         <th>Typ zakładu i kurs</th>
-
         <th>Data zakładu</th>
         <th>Kwota zakładu</th>
         <th>Przewidywana wygrana</th>
@@ -107,10 +114,9 @@
           <td>
             <input type="number" name="price" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" #moneyInsertInput required value=1.0 min=1.0 max={{userStatistic.accountBalance}}>PLN
           </td>
-<td>
-<button type="submit" class="btn btn-primary btn-sm" (click)="betMatch(matchId.value, betType.value, moneyInsertInput.value)">Obstaw</button>
-
-</td>
+          <td>
+          <button type="submit" class="btn btn-primary btn-sm" (click)="betMatch(matchId.value, betType.value, moneyInsertInput.value)">Obstaw</button>
+          </td>
 
 
        </tr>
