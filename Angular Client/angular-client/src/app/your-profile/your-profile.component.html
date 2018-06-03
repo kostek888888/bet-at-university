@@ -23,7 +23,7 @@
     </tr>
     <tr>
       <td>Data najwyższej wygranej</td>
-      <td>{{userStatistic?.biggestWinDate | date: "yyyy/MM/dd HH:mm"}}</td>
+      <td>{{userStatistic?.biggestWinDate}}</td>
     </tr>
     <tr>
       <td>Przegranych zakładów</td>
@@ -104,7 +104,9 @@
                 <option value="12">Wygrana gosp. lub gości</option>
               </select>
           </td>
-          <td><input type="number" #moneyInsertInput required value=1 min=1 max={{userStatistic.accountBalance}}> PLN</td>
+          <td>
+            <input type="number" name="price" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" #moneyInsertInput required value=1.0 min=1.0 max={{userStatistic.accountBalance}}>PLN
+          </td>
 <td>
 <button type="submit" class="btn btn-primary btn-sm" (click)="betMatch(matchId.value, betType.value, moneyInsertInput.value)">Obstaw</button>
 

@@ -19,9 +19,9 @@ export class YourProfileComponent implements OnInit {
   activeBetsArray: Array<BetModel>;
   betStatusInfo: boolean;
   constructor(public authservice: AuthService, private http: HttpService) {
+    this.getBetsRates();
     this.getUserStatistic();
     this.getMatchesToBet();
-    this.getBetsRates();
     this.getActiveBets();
    }
 
@@ -51,6 +51,7 @@ export class YourProfileComponent implements OnInit {
   getBetsRates() {
     this.http.getBetsRatesHttpService().subscribe(betsRatesFromDB => {
       this.betsRatesArray = ConvertBetsRateModel.toBetsRatesModel(JSON.stringify(betsRatesFromDB));
+      console.log(this.betsRatesArray);
     });
   }
 
@@ -67,9 +68,7 @@ export class YourProfileComponent implements OnInit {
 
   getActiveBets() {
     this.http.postActiveBets(this.authservice.userId.toString()).subscribe(activeBetsArrayResp => {
-      console.log(activeBetsArrayResp);
       this.activeBetsArray = ConvertBetModel.toBetModel(JSON.stringify(activeBetsArrayResp));
-      console.log(this.activeBetsArray);
     });
   }
 

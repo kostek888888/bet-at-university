@@ -22,8 +22,8 @@ export class HttpService {
     return this.http.get<LeagueTableModel>( this.baseURl + '/team');
   }
 
-  getMatch(): Observable<MatchModel> {
-    return this.http.get<MatchModel>( this.baseURl + '/match');
+  getMatchToNotBet(): Observable<MatchModel> {
+    return this.http.get<MatchModel>( this.baseURl + '/matchToNotBet');
   }
 
   getMatchToBetHttpService(): Observable<MatchModel> {

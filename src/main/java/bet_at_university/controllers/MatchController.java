@@ -43,6 +43,20 @@ public class MatchController {
     }
 
     @CrossOrigin(origins="http://localhost:4200")
+    @GetMapping(path = "/matchToNotBet")
+    public @ResponseBody ArrayList<Match> getAllMatchesToNotBet(){
+        matchArrayList = (ArrayList<Match>) matchRepository.findAll();
+        matchToBetArrayList.clear();
+        for(int i =0; i < matchArrayList.size(); i++){
+            if(matchArrayList.get(i).getAwayTeamScore() >= 0){
+                matchToBetArrayList.add(matchArrayList.get(i));
+            }
+        }
+        System.out.print(matchToBetArrayList.size());
+        return matchToBetArrayList;
+    }
+
+    @CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/allMatches")
     public @ResponseBody Iterable<Match> getAllMatches(){
         return matchRepository.findAll();
