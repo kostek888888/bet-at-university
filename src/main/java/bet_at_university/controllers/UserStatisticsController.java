@@ -54,4 +54,19 @@ public class UserStatisticsController {
         userStatisticRepository.save(userStatistics);
         return userStatisticRepository.findById(userId);
     }
+
+    @CrossOrigin(origins="http://localhost:4200")
+    @PostMapping(path = "/withdrawal")
+    public @ResponseBody  Optional<UserStatistics> withdrawal(@RequestParam long userId, @RequestParam double money){
+        UserStatistics userStatistics = new UserStatistics();
+        userStatisticsArrayList = (ArrayList<UserStatistics>) userStatisticRepository.findAll();
+        userStatistics.setId(userId);
+        userStatistics.setAccountBalance(userStatisticsArrayList.get((int) userId-1).getAccountBalance() - money);
+        userStatistics.setWonMatches(userStatisticsArrayList.get((int) userId-1).getWonMatches());
+        userStatistics.setLostMatches(userStatisticsArrayList.get((int) userId-1).getLostMatches());
+        userStatistics.setBiggestWinDate(userStatisticsArrayList.get((int) userId-1).getBiggestWinDate());
+        userStatistics.setBiggestWin(userStatisticsArrayList.get((int) userId-1).getBiggestWin());
+        userStatisticRepository.save(userStatistics);
+        return userStatisticRepository.findById(userId);
+    }
 }

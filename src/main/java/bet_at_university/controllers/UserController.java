@@ -41,7 +41,7 @@ public class UserController {
         User user = new User();
         UserStatistics userStatistics = new UserStatistics();
 
-        userStatistics.setAccountBalance(100);
+        userStatistics.setAccountBalance(0);
         userStatistics.setBiggestWin(0);
         userStatistics.setBiggestWinDate("-");
         userStatistics.setWonMatches(0);
