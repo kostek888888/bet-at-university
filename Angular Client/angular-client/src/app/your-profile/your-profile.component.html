@@ -11,7 +11,7 @@
   <tbody>
     <tr>
       <td>Bilans konta:</td>                <!--number: 'min licz. min_po_przec-max_po_przec' -->
-      <td>{{userStatistic?.accountBalance | number : '1.2-2'}} PLN <button type="submit" (click)="increaseAccountBalance()" id="increase-the-amount-btn" class="btn btn-primary btn-sm">Zwiększ kwote</button> // tu strona do paypal</td>
+      <td>{{userStatistic?.accountBalance | number : '1.2-2'}} PLN <button type="submit" (click)="increaseAccountBalance()" id="increase-the-amount-btn" class="btn btn-primary btn-sm">Zwiększ kwote</button></td>
     </tr>
      <tr>
       <td>Wypłać pieniądze z konta</td>
@@ -63,7 +63,7 @@
         <td>Gospodarz: {{bet.matches.homeTeamId.name}} <br> Goście: {{bet.matches.awayTeamId.name}} </td>
         <td>{{bet.matches.matchDateAndTime | date: "yyyy/MM/dd"}}</td>
         <td>{{parseBetTypeToString(bet.betType)}} {{getBetRateToTable(bet.betType, bet.id)}}</td>
-        <td>{{bet.buyDateAndTime | date: "yyyy/MM/dd HH:dd"}}</td>
+        <td>{{bet.buyDateAndTime | date: "yyyy/MM/dd HH:mm"}}</td>
         <td>{{bet.moneyInserted}}PLN</td>
         <td>{{bet.amountToPaidOut}}PLN</td>
       </tr>
