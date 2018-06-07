@@ -6,6 +6,7 @@
 export const environment = {
   production: false,
   config: {
-    baseURL: 'http://localhost:8080'
+    baseURL: 'http://localhost:8080',
+    manuLogoURL: '/assets/logo.png'
   }
 };

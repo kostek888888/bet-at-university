@@ -9,7 +9,7 @@
         <input ngModel type="password" name="password" placeholder="Pole wymagane" required minlength="1">
 
       <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Zaloguj</button>
-      <button type="button" class="btn btn-primary" (click)="redirectToRegister()">Rejestracja</button>
+      <button type="button" class="btn btn-primary" routerLink="/register">Rejestracja</button>
 
     </form>
 <div *ngIf="authService.loginStatus == false">

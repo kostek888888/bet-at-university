@@ -19,8 +19,4 @@ export class LoginComponent implements OnInit {
   login(formData: NgForm) {
     this.authService.login(formData.value.login, formData.value.password);
   }
-
-  redirectToRegister() {
-    this.router.navigate(['/register']);
-  }
 }
