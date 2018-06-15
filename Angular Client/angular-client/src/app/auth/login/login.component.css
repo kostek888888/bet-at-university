@@ -1,7 +1,14 @@
 form {
-    display: grid;
-    grid-template-columns: 300px;
-    grid-gap: 16px;
-    justify-content: center;
-    text-align: center;
+  margin-top: 35px;
+  display: grid;
+  grid-template-columns: 300px;
+  grid-gap: 16px;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 200px;
+}
+
+
+.container {
+  height: 800px;
 }

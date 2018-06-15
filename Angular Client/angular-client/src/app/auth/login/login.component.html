@@ -1,19 +1,25 @@
-<h1>Logowanie</h1>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container text-center">
 
-    <form (ngSubmit)="login(formData)" #formData = "ngForm">  <!--Przeslanie formukarza w lokalnej referencji formData-->
+    <h1>Logowanie</h1>
 
-        Login
-        <input ngModel type="text" name="login" placeholder="Pole wymagane" required minlength="1">
+      <form (ngSubmit)="login(formData)" #formData = "ngForm">  <!--Przeslanie formukarza w lokalnej referencji formData-->
 
-        Haslo
-        <input ngModel type="password" name="password" placeholder="Pole wymagane" required minlength="1">
+          Login
+          <input ngModel type="text" name="login" placeholder="Pole wymagane" required minlength="1">
 
-      <button type="submit" class="btn btn-primary" [disabled]="formData.invalid">Zaloguj</button>
-      <button type="button" class="btn btn-primary" routerLink="/register">Rejestracja</button>
+          Haslo
+          <input ngModel type="password" name="password" placeholder="Pole wymagane" required minlength="1">
 
-    </form>
-<div *ngIf="authService.loginStatus == false">
-  <div class="login-register-status">
-    Nieprawidłowe dane logowania
+        <button type="submit" class="btn btn-success" [disabled]="formData.invalid">Zaloguj</button>
+        <button type="button" class="btn btn-success" routerLink="/register">Rejestracja</button>
+
+      </form>
+      <div *ngIf="authService.loginStatus == false">
+        <div class="login-register-status">
+          Nieprawidłowe dane logowania
+        </div>
+      </div>
+
   </div>
 </div>

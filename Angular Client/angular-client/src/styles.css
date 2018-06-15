@@ -1,16 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-.menuStyle{
-  background-color: #337AB7;
-}
 
 #menuLink{
-  color: #000;
-  font-weight: bold;
+  color: rgb(187, 187, 187);
   font-size: 22px;
+  font-weight: bold;
 }
 
-.container{
-  padding: 3rem 1.5rem;
+.content{
+  height: 100%;
 }
 
 
@@ -23,4 +20,10 @@
   color: red;
   font-weight: bold;
 }
+
+footer {
+  margin: 0px;
+}
+
+
 

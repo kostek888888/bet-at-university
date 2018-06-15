@@ -1,67 +1,56 @@
-<h1>Rejestracja</h1>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container text-center">
+  <h1>Rejestracja</h1>
 
-<form (ngSubmit)="register(formData)" #formData="ngForm">
-      <!--Login-->
-      <div class="form-group">
-        <label class=" control-label" for="login">Login</label>
+    <form (ngSubmit)="register(formData)" #formData="ngForm">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label class=" control-label" for="login">Login</label>
           <input ngModel type="text" name="login" class="form-control" placeholder="Pole wymagane" required minlength="1">
-      </div>
-
-      <!--Hasło-->
-      <div class="form-group">
-        <label class=" control-label" for="password">Hasło</label>
+        </div>
+        <div class="form-group col-md-6">
+          <label class=" control-label" for="password">Hasło</label>
           <input ngModel type="password" name="password"  class="form-control" placeholder="Pole wymagane" required minlength="1">
+        </div>
       </div>
 
-      <!--Imie-->
-      <div class="form-group">
+    <div class="form-row">
+      <div class="form-group col-md-6">
         <label class=" control-label" for="name">Imie</label>
-          <input ngModel type="text" name="name" class="form-control" placeholder="Pole wymagane" required minlength="1">
+        <input ngModel type="text" name="name" class="form-control" placeholder="Pole wymagane" required minlength="1">
       </div>
 
-      <!--Nazwisko-->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label class=" control-label" for="surname">Nazwisko</label>
-          <input ngModel type="text" name="surname" class="form-control" placeholder="Pole wymagane" required minlength="1">
+        <input ngModel type="text" name="surname" class="form-control" placeholder="Pole wymagane" required minlength="1">
       </div>
+    </div>
 
-      <!--Email-->
-      <div class="form-group">
-        <label class=" control-label" for="birthDate">Data urodzenia</label>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label class=" control-label" for="birthDate">Data urodzenia</label>
           <input ngModel type="date" name="birthDate" class="form-control" placeholder="Pole wymagane" required minlength="1">
-      </div>
+        </div>
 
-      <!--Adres-->
-      <div class="form-group">
-        <label class=" control-label" for="address">Adres</label>
+        <div class="form-group col-md-6">
+          <label class=" control-label" for="address">Adres</label>
           <input ngModel type="text" name="address" class="form-control" placeholder="Pole wymagane" required minlength="1">
-      </div>
+        </div>
 
-      <!--Kod pocztowy-->
-      <div class="form-group">
-        <label class=" control-label" for="postCode">Kod pocztowy</label>
+        <div class="form-group col-md-3">
+          <label class=" control-label" for="postCode">Kod pocztowy</label>
           <input ngModel type="text" name="postCode" class="form-control" placeholder="Pole wymagane" required minlength="1" maxlength="6">
+        </div>
       </div>
-
-
-      <!-- Warunki
-      <div class="col-sm-12 form-check">
-        <input class="form-check-input" ngModel type="checkbox" value="" name="acptChectbox""">
-        <label class="form-check-label" for="acptChectbox">
-          Akceptuje
-          <a href="regulations.php" target="_blank">Regulamin</a>
-        </label>
-      </div> -->
 
       <div *ngIf="checkLoginAvailability == false">
         <div class="login-register-status">
-           Login jest zajęty
+          Login jest zajęty
         </div>
       </div>
-     <button type="submit" [disabled]="formData.invalid" class="btn btn btn-success">Zarejestruj się</button>
+      <button type="submit" [disabled]="formData.invalid" class="btn btn btn-success">Zarejestruj się</button>
+    </form>
 
-  </form>
-
-<br>
-
+  </div>
+</div>
 

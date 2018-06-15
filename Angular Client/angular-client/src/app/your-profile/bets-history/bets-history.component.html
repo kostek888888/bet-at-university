@@ -1,55 +1,56 @@
-<h1>Historia zakładów</h1>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container text-center">
+    <h1>Historia zakładów</h1>
 
+    <form (ngSubmit)="getSearchBets()">
+      <div class="form-group row">
+        <div class="col-6">
+          <input [(ngModel)]="formObj.searchText" class="form-control" type="text" name="search" required="" placeholder="Wyszukaj">
+        </div>
 
-<form (ngSubmit)="getSearchBets()">
-  <div class="form-group row">
-    <div class="col-6">
-      <input [(ngModel)]="formObj.searchText" class="form-control" type="text" name="search" required="" placeholder="Wyszukaj">
-    </div>
+        <div class="col-4">
+          <select [(ngModel)]="formObj.filter" class="form-control" name="search_filter">
+            <option value="noFilter">Wszystkie zakłady</option>
+            <option value="searchWon">Wygrane</option>
+            <option value="searchLost">Przegrane</option>
+          </select>
+        </div>
 
-    <div class="col-4">
-      <select [(ngModel)]="formObj.filter" class="form-control" name="search_filter">
-        <option value="noFilter">Wszystkie zakłady</option>
-        <option value="searchWon">Wygrane</option>
-        <option value="searchLost">Przegrane</option>
-      </select>
-    </div>
+        <div class="col-2">
+          <button type="submit" class="btn btn-success form-control">Szukaj</button>
+        </div>
+      </div>
 
-    <div class="col-2">
-      <button type="submit" class="btn btn-primary form-control">Szukaj</button>
+    </form>
+    <br>
+    <br>
+
+      <table class="table table-striped">
+        <thead>
+          <tr  class="table-active">
+            <th>Drużyny </th>
+            <th>Data meczu</th>
+            <th>Typ zakładu i kurs</th>
+            <th>Data zakładu</th>
+            <th>Kwota zakładu</th>
+            <th>Przewidywana wygrana</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let bet of betsArray">
+            <td>Gospodarz: {{bet.matches.homeTeamId.name}}
+              <br> Goście: {{bet.matches.awayTeamId.name}} </td>
+            <td>{{bet.matches.matchDateAndTime | date: "yyyy/MM/dd"}}</td>
+            <td>{{parseBetTypeToString(bet.betType)}} {{getBetRateToTable(bet.betType, bet.id)}}</td>
+            <td>{{bet.buyDateAndTime | date: "yyyy/MM/dd HH:dd"}}</td>
+            <td>{{bet.moneyInserted}}PLN</td>
+            <td>{{bet.amountToPaidOut}}PLN</td>
+            <td>{{ parseStatusToString(bet.betResult.toString()) }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-
-</form>
-<br>
-<br>
-
-<div class="bets-table">
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>Drużyny </th>
-        <th>Data meczu</th>
-        <th>Typ zakładu i kurs</th>
-        <th>Data zakładu</th>
-        <th>Kwota zakładu</th>
-        <th>Przewidywana wygrana</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let bet of betsArray">
-        <td>Gospodarz: {{bet.matches.homeTeamId.name}}
-          <br> Goście: {{bet.matches.awayTeamId.name}} </td>
-        <td>{{bet.matches.matchDateAndTime | date: "yyyy/MM/dd"}}</td>
-        <td>{{parseBetTypeToString(bet.betType)}} {{getBetRateToTable(bet.betType, bet.id)}}</td>
-        <td>{{bet.buyDateAndTime | date: "yyyy/MM/dd HH:dd"}}</td>
-        <td>{{bet.moneyInserted}}PLN</td>
-        <td>{{bet.amountToPaidOut}}PLN</td>
-        <td>{{ parseStatusToString(bet.betResult.toString()) }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
