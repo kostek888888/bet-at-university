@@ -1,13 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 #menuLink{
   color: rgb(187, 187, 187);
   font-size: 22px;
   font-weight: bold;
 }
 
+html {
+  background-color:#E9ECEF;
+}
+
+
 .content{
   height: 100%;
+  background-color: #E9ECEF;
+  padding: 40px 100px 40px 100px;
 }
 
 
@@ -16,7 +24,7 @@
 }
 
 .login-register-status {
-  margin-top: 10px;
+  margin-top: 1%;
   color: red;
   font-weight: bold;
 }
