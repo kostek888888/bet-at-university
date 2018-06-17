@@ -12,12 +12,17 @@
 
         <button type="submit" class="btn btn-success" [disabled]="formData.invalid">Zaloguj</button>
         <button type="button" class="btn btn-success" routerLink="/register">Rejestracja</button>
+        <button type="button" class="btn btn-primary" (click)="loginViaFacebook()" >Rejestracja/Logowanie przez Facebook</button>
 
       </form>
       <div *ngIf="authService.loginStatus == false">
-        <div class="login-register-status">
+        <p class="login-register-status">
           Nieprawidłowe dane logowania
-        </div>
+        </p>
       </div>
+
+      <p class="facebookUserWriteToBaseMsg">
+          {{facebookUserWriteToBaseMsg}}
+      </p>
 
 </div>

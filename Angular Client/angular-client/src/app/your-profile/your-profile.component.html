@@ -45,81 +45,36 @@
       <button type="submit" class="btn btn-success btn" routerLink="bets-history">Historia zakładów</button>
     </div>
 
+
+
     <div class="current-bets-table">
       <p><b>Aktualnie obstawione zakłady</b></p>
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr class="table-active">
-            <th>Drużyny </th>
-            <th>Data meczu</th>
-            <th>Typ zakładu i kurs</th>
-            <th>Data zakładu</th>
-            <th>Kwota zakładu</th>
-            <th>Przewidywana wygrana</th>
-          </tr>
-        </thead>
+      <div *ngIf="activeBetsArray.length === 0"> <p>Brak aktywnych zakładów</p> </div>
 
-        <tbody>
-          <tr *ngFor="let bet of activeBetsArray">
-            <td>Gospodarz: {{bet.matches.homeTeamId.name}} <br> Goście: {{bet.matches.awayTeamId.name}} </td>
-            <td>{{bet.matches.matchDateAndTime | date: "yyyy/MM/dd"}}</td>
-            <td>{{parseBetTypeToString(bet.betType)}} {{getBetRateToTable(bet.betType, bet.id)}}</td>
-            <td>{{bet.buyDateAndTime | date: "yyyy/MM/dd HH:mm"}}</td>
-            <td>{{bet.moneyInserted}}PLN</td>
-            <td>{{bet.amountToPaidOut}}PLN</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div *ngIf="activeBetsArray.length > 0">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr class="table-active">
+              <th>Drużyny </th>
+              <th>Data meczu</th>
+              <th>Typ zakładu i kurs</th>
+              <th>Data zakładu</th>
+              <th>Kwota zakładu</th>
+              <th>Przewidywana wygrana</th>
+            </tr>
+          </thead>
 
-    <div class="bets-table">
-      <p><b>Dostępne zakłady</b></p>
-      <table class="table table-bordered table-hover">
-        <thead class="bet-table-thead">
-          <tr class="table-active">
-            <th>Drużyny</th>
-            <th>Data meczu</th>
-            <th>Kursy</th>
-            <th>Typ zakładu</th>
-            <th>Kwota zakładu</th>
-            <th>Akcja</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let match of matchesToBetArray; let i=index">
-
-              <input type="hidden" value={{match.id}} #matchId>
-              <td>Gospodarz: <b>{{match.homeTeamId.name}}</b> <br> Goście: <b>{{match.awayTeamId.name}}</b> </td>
-
-              <td><b>{{match.matchDateAndTime | date: "yyyy/MM/dd"}}</b></td>
-
-              <td>Wygrana gospodarzy: <b>{{betsRatesArray[i].homeTeamWinRate}}</b>
-                <br>Wygrana gości: <b>{{betsRatesArray[i].awayTeamWinRate}}</b>
-                <br>Remis: <b>{{betsRatesArray[i].drawRate}}</b>
-                <br> Wygrana gosp. lub remis: <b>{{betsRatesArray[i].homeTeamWinOrDrawRate}}</b>
-                <br> Wygrana gości lub remis: <b>{{betsRatesArray[i].awayTeamWinOrDrawRate}}</b>
-                <br> Wygrana gosp. lub gości: <b>{{betsRatesArray[i].homeWinOrAwayWin}}</b>
-              </td>
-
-              <td>
-                  <select #betType>
-                    <option value="1">Wygrana gospodarzy</option>
-                    <option value="2">Wygrana gości</option>
-                    <option value="X">Remis</option>
-                    <option value="1X">Wygrana gosp. lub remis</option>
-                    <option value="2X">Wygrana gości lub remis</option>
-                    <option value="12">Wygrana gosp. lub gości</option>
-                  </select>
-              </td>
-              <td>
-                <input type="number" name="price" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" #moneyInsertInput required value=1.0 min=1.0 max={{userStatistic.accountBalance}}>PLN
-              </td>
-              <td>
-              <button type="submit" class="btn btn-success btn-sm" (click)="betMatch(matchId.value, betType.value, moneyInsertInput.value)">Obstaw</button>
-              </td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <tr *ngFor="let bet of activeBetsArray">
+              <td>Gospodarz: {{bet.matches.homeTeamId.name}} <br> Goście: {{bet.matches.awayTeamId.name}} </td>
+              <td>{{bet.matches.matchDateAndTime | date: "yyyy/MM/dd"}}</td>
+              <td>{{parseBetTypeToString(bet.betType)}} {{getBetRateToTable(bet.betType, bet.id)}}</td>
+              <td>{{bet.buyDateAndTime | date: "yyyy/MM/dd HH:mm"}}</td>
+              <td>{{bet.moneyInserted}}PLN</td>
+              <td>{{bet.amountToPaidOut}}PLN</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 </div>

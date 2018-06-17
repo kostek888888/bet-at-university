@@ -7,6 +7,8 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { AuthService } from './auth/auth.service';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { GamesResultsComponent } from './games-results/games-results.component';
@@ -17,7 +19,16 @@ import { LoginComponent } from './auth/login/login.component';
 import { LeagueTableComponent } from './league-table/league-table.component';
 import { RegisterComponent } from './register/register.component';
 import { BetsHistoryComponent } from './your-profile/bets-history/bets-history.component';
+import { PlaceABetComponent } from './place-a-bet/place-a-bet.component';
 
+const config = {
+  apiKey: 'AIzaSyBJLTQwVwvABt0VYLpO3sIk_cdKkpxMs_k',
+  authDomain: 'bet-at-university.firebaseapp.com',
+  databaseURL: 'https://bet-at-university.firebaseio.com',
+  projectId: 'bet-at-university',
+  storageBucket: 'bet-at-university.appspot.com',
+  messagingSenderId: '612444667505'
+};
 
 
 
@@ -31,15 +42,20 @@ import { BetsHistoryComponent } from './your-profile/bets-history/bets-history.c
     LoginComponent,
     LeagueTableComponent,
     RegisterComponent,
-    BetsHistoryComponent
+    BetsHistoryComponent,
+    PlaceABetComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(config),
+    AngularFireAuthModule
   ],
-  providers: [AuthGuardService, AuthService, HttpService, CookieService],
+  providers: [
+    AuthGuardService, AuthService, HttpService, CookieService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

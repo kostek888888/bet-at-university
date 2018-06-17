@@ -4,15 +4,20 @@ import { HttpService } from '../http.service';
 import { CookieService } from 'ngx-cookie-service';
 
 
+
+
 @Injectable()
 export class AuthService {
 
   public userId: number;
   loginStatus: boolean;
 
-  constructor(private httpService: HttpService, private cookieService: CookieService, private router: Router) {
-    this.checkCookieExistAndInitUserIdVariable(); // on init check cookie
-   }
+  constructor(private httpService: HttpService,
+    private cookieService: CookieService,
+    private router: Router,
+    ) {
+      this.checkCookieExistAndInitUserIdVariable(); // on init check cookie
+    }
 
    checkCookieExistAndInitUserIdVariable(): void {
      if (this.cookieService.check('bet_at_university_cookie') === true) {
@@ -39,6 +44,7 @@ export class AuthService {
     this.httpService.postLogout().subscribe(logoutStatus => {
       if (logoutStatus) {
         this.userId = null;
+        window.location.reload();
       }
       console.log('Logout status: ' + logoutStatus);
     });

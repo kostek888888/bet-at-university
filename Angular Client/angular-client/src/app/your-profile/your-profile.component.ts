@@ -13,16 +13,14 @@ import { BetModel, ConvertBetModel } from '../models/betModel';
 })
 export class YourProfileComponent implements OnInit {
 
-  matchesToBetArray: Array<MatchModel>;
+
   userStatistic: UserStatisticModel;
   betsRatesArray: Array<BetsRatesModel>;
   activeBetsArray: Array<BetModel>;
-  betStatusInfo: boolean;
   withdrawMsg = '';
   constructor(public authservice: AuthService, private http: HttpService) {
     this.getBetsRates();
     this.getUserStatistic();
-    this.getMatchesToBet();
     this.getActiveBets();
    }
 
@@ -43,11 +41,7 @@ export class YourProfileComponent implements OnInit {
     });
   }
 
-  getMatchesToBet() {
-    this.http.getMatchToBetHttpService().subscribe( matchesFromDB => {
-      this.matchesToBetArray = ConvertMatchModel.toMatchModel(JSON.stringify(matchesFromDB));
-    });
-  }
+
 
   getBetsRates() {
     this.http.getBetsRatesHttpService().subscribe(betsRatesFromDB => {
@@ -56,16 +50,7 @@ export class YourProfileComponent implements OnInit {
     });
   }
 
-  betMatch(matchId: string, betType: string, moneyInsertInput: string) {
-    const moneyInsertedNumber = parseFloat(moneyInsertInput);
-    if (parseFloat(moneyInsertInput) <= this.userStatistic.accountBalance) {
-      console.log(matchId + ' ' + this.authservice.userId + ' ' + betType + ' ' + moneyInsertInput);
-      this.http.postBetMatch(matchId, this.authservice.userId.toString(), betType, moneyInsertInput).subscribe(betStatus => {
-        this.betStatusInfo = betStatus;
-        window.location.reload();
-      });
-    }
-  }
+
 
   getActiveBets() {
     this.http.postActiveBets(this.authservice.userId.toString()).subscribe(activeBetsArrayResp => {

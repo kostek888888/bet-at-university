@@ -21,12 +21,16 @@ public class User {
 
     private String address;
 
+    private String email;
+
     private String postCode;
 
     @Column(name = "login", unique = true)
     private String login;
 
     private String password;
+
+    private String facebookId;
 
 
 
@@ -78,6 +82,14 @@ public class User {
         this.address = address;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPostCode() {
         return postCode;
     }
@@ -100,5 +112,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
     }
 }

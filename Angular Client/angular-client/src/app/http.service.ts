@@ -7,8 +7,10 @@ import { environment } from '../environments/environment';
 import { NgForm } from '@angular/forms';
 import { UserStatisticModel, User } from './models/userModel';
 import { BetsRatesModel } from './models/betsRatesModel';
-import { AuthService } from './auth/auth.service';
 import { BetModel } from './models/betModel';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import { Router } from '@angular/router';
 
 
 
@@ -16,7 +18,8 @@ import { BetModel } from './models/betModel';
 export class HttpService {
 
   private baseURl = environment.config.baseURL;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private firebaseAuth: AngularFireAuth,
+              private router: Router) { }
 
   getLeagueTable(): Observable<LeagueTableModel> {
     return this.http.get<LeagueTableModel>( this.baseURl + '/team');
@@ -41,6 +44,8 @@ export class HttpService {
     return this.http.post<boolean>( this.baseURl + '/logIn', params, { withCredentials: true} );
   }
 
+
+
   postLogout(): Observable<boolean> {
     return this.http.post<boolean>(this.baseURl + '/logOut', null, { withCredentials: true });
   }
@@ -51,11 +56,14 @@ export class HttpService {
       .append('password', formData.value.password)
       .append('name', formData.value.name)
       .append('surname', formData.value.surname)
+      .append('email', formData.value.email)
       .append('birthDate', formData.value.birthDate)
       .append('address', formData.value.address)
       .append('postCode', formData.value.postCode);
     return this.http.post<boolean>(this.baseURl + '/register', params);
   }
+
+
 
   checkLoginAvailability(userLogin: string): Observable<boolean> {
     const param = new HttpParams()
@@ -92,4 +100,44 @@ export class HttpService {
     const params = new HttpParams().append('userId', userId).append('money', money);
     return this.http.post<UserStatisticModel>(this.baseURl + '/withdrawal', params);
   }
+
+  connectWithFacebook() {
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      this.firebaseAuth.auth
+        .signInWithPopup(provider)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
+
+  findUserByFacebookId(facebookId: string): Observable<Boolean> {
+    const params = new HttpParams().append('facebookId', facebookId);
+    return this.http.post<Boolean>(this.baseURl + '/checkUserByFacebookId', params);
+  }
+
+  postWriteFacebookUserInDB(name: string, surname: string, email: string, facebookId: string): Observable<boolean> {
+    const params = new HttpParams()
+      .append('name', name)
+      .append('surname', surname)
+      .append('email', email)
+      .append('facebookId', facebookId);
+    return this.http.post<boolean>(this.baseURl + '/writeFacebookUserInDB', params);
+  }
+
+  postLoginFacebookUser(facebookId: string): Observable<Boolean> {
+    const params = new HttpParams().append('facebookId', facebookId);
+    return this.http.post<Boolean>(this.baseURl + '/loginFacebookUser', params, { withCredentials: true });
+  }
+
+  logoutFromFacebook() {
+    this.firebaseAuth.auth.signOut().then(() => {
+      this.router.navigate(['login']);
+    });
+  }
+
 }

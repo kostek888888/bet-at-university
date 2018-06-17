@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
+import { HttpService } from './http.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,11 @@ import { environment } from '../environments/environment';
 export class AppComponent {
 
   menuLogoURL = environment.config.manuLogoURL;
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router, private http: HttpService) { }
 
   logout() {
     this.authService.logout();
+    this.http.logoutFromFacebook();
     this.router.navigate(['/login']);
   }
 }

@@ -9,6 +9,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { LeagueTableComponent } from './league-table/league-table.component';
 import { RegisterComponent } from './register/register.component';
 import { BetsHistoryComponent } from './your-profile/bets-history/bets-history.component';
+import { PlaceABetComponent } from './place-a-bet/place-a-bet.component';
 
 const appRoutes: Routes = [
   {
@@ -39,6 +40,11 @@ const appRoutes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'place-a-bet',
+    component: PlaceABetComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: 'games-results',
     component: GamesResultsComponent
   },
@@ -53,7 +59,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

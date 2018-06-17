@@ -24,9 +24,13 @@ html {
 }
 
 .login-register-status {
-  margin-top: 1%;
-  color: red;
+  color: darkred;
   font-weight: bold;
+}
+
+.facebookUserWriteToBaseMsg{
+    color: green;
+    font-weight: bold;
 }
 
 footer {
