@@ -10,6 +10,7 @@ import { LeagueTableComponent } from './league-table/league-table.component';
 import { RegisterComponent } from './register/register.component';
 import { BetsHistoryComponent } from './your-profile/bets-history/bets-history.component';
 import { PlaceABetComponent } from './place-a-bet/place-a-bet.component';
+import { NextMatchesComponent } from './next-matches/next-matches.component';
 
 const appRoutes: Routes = [
   {
@@ -43,6 +44,10 @@ const appRoutes: Routes = [
     path: 'place-a-bet',
     component: PlaceABetComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'next-matches',
+    component: NextMatchesComponent
   },
   {
     path: 'games-results',

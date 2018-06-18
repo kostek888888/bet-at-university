@@ -14,3 +14,8 @@ table {
 .bets-table-legend b {
   padding-right: 10px;
 }
+
+.user-statistic {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}

@@ -17,6 +17,7 @@ export class PlaceABetComponent implements OnInit {
   betsRatesArray: Array<BetsRatesModel>;
   userStatistic: UserStatisticModel;
   betStatusInfo: boolean;
+  notEnoughMoneyInfo: string;
   constructor(public authservice: AuthService, private http: HttpService, private router: Router) { }
 
   ngOnInit() {
@@ -45,13 +46,15 @@ export class PlaceABetComponent implements OnInit {
   }
 
   betMatch(matchId: string, betType: string, moneyInsertInput: string) {
-    const moneyInsertedNumber = parseFloat(moneyInsertInput);
     if (parseFloat(moneyInsertInput) <= this.userStatistic.accountBalance) {
       console.log(matchId + ' ' + this.authservice.userId + ' ' + betType + ' ' + moneyInsertInput);
       this.http.postBetMatch(matchId, this.authservice.userId.toString(), betType, moneyInsertInput).subscribe(betStatus => {
         this.betStatusInfo = betStatus;
         this.router.navigate(['your-profile']);
+        this.notEnoughMoneyInfo = '';
       });
+    } else {
+      this.notEnoughMoneyInfo = 'Masz zbyt mało pieniędzy aby postawić zakład';
     }
   }
 
@@ -63,5 +66,12 @@ export class PlaceABetComponent implements OnInit {
     } else {
       return 'darkred';
     }
+  }
+
+  increaseAccountBalance(money = '500') {
+    const userId = this.userStatistic.id.toString();
+    this.http.postIncreaseAccountBalance(userId, money).subscribe(userStatisticObj => {
+      this.userStatistic = userStatisticObj;
+    });
   }
 }

@@ -29,6 +29,10 @@ export class HttpService {
     return this.http.get<MatchModel>( this.baseURl + '/matchToNotBet');
   }
 
+  getMatchToBet(): Observable<MatchModel> {
+    return this.http.get<MatchModel>(this.baseURl + '/matchToBet');
+  }
+
   getMatchToBetHttpService(): Observable<MatchModel> {
     return this.http.get<MatchModel>(this.baseURl + '/matchToBet');
   }
