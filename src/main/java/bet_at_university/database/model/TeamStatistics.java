@@ -12,12 +12,6 @@ public class TeamStatistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private int wonMatches;
-
-    private int lostMatches;
-
-    private int drawMatches;
-
     private String leagueName;
 
     private int playedGames;
@@ -25,6 +19,10 @@ public class TeamStatistics {
     private int points;
 
     private int goals;
+
+    private int goalsAgainst;
+
+    private int goalDifference;
 
     private String img;
 
@@ -34,30 +32,6 @@ public class TeamStatistics {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getWonMatches() {
-        return wonMatches;
-    }
-
-    public void setWonMatches(int wonMatches) {
-        this.wonMatches = wonMatches;
-    }
-
-    public int getLostMatches() {
-        return lostMatches;
-    }
-
-    public void setLostMatches(int lostMatches) {
-        this.lostMatches = lostMatches;
-    }
-
-    public int getDrawMatches() {
-        return drawMatches;
-    }
-
-    public void setDrawMatches(int drawMatches) {
-        this.drawMatches = drawMatches;
     }
 
     public String getLeagueName() {
@@ -90,6 +64,22 @@ public class TeamStatistics {
 
     public void setGoals(int goals) {
         this.goals = goals;
+    }
+
+    public int getGoalsAgainst() {
+        return goalsAgainst;
+    }
+
+    public void setGoalsAgainst(int goalsAgainst) {
+        this.goalsAgainst = goalsAgainst;
+    }
+
+    public int getGoalDifference() {
+        return goalDifference;
+    }
+
+    public void setGoalDifference(int goalDifference) {
+        this.goalDifference = goalDifference;
     }
 
     public String getImg() {

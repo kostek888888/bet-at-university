@@ -22,15 +22,16 @@ public class BetRateData {
         BetRate betRate = new BetRate();
         matchArrayList = (ArrayList<Match>) matchRepository.findAll();
 
-        for(int i=0; i<matchArrayList.size(); i++) {
+        for (int i = 0; i < matchArrayList.size(); i++) {
             rateArrayList = calculateRate(
-                    matchArrayList.get(i).getHomeTeamId().getTeamStatistics().getWonMatches(),
-                    matchArrayList.get(i).getHomeTeamId().getTeamStatistics().getLostMatches(),
-                    matchArrayList.get(i).getHomeTeamId().getTeamStatistics().getDrawMatches(),
-                    matchArrayList.get(i).getAwayTeamId().getTeamStatistics().getWonMatches(),
-                    matchArrayList.get(i).getAwayTeamId().getTeamStatistics().getLostMatches(),
-                    matchArrayList.get(i).getAwayTeamId().getTeamStatistics().getDrawMatches());
-            betRate.setId(i+1);
+                    matchArrayList.get(i).getHomeTeamId().getTeamStatistics().getGoals(),
+                    matchArrayList.get(i).getHomeTeamId().getTeamStatistics().getGoalDifference(),
+                    matchArrayList.get(i).getAwayTeamId().getTeamStatistics().getGoals(),
+                    matchArrayList.get(i).getAwayTeamId().getTeamStatistics().getGoalDifference(),
+                    matchArrayList.get(i).getHomeTeamId().getTeamStatistics().getGoalsAgainst(),
+                    matchArrayList.get(i).getAwayTeamId().getTeamStatistics().getGoalsAgainst());
+
+            betRate.setId(i + 1);
             betRate.setHomeTeamWinRate(rateArrayList.get(0));
             betRate.setAwayTeamWinRate(rateArrayList.get(1));
             betRate.setDrawRate(rateArrayList.get(2));
@@ -43,23 +44,23 @@ public class BetRateData {
     }
 
 
-    public ArrayList<Double> calculateRate(int homeWon, int homeLost, int homeDraw, int awayWon, int awayLost, int awayDraw){
+    public ArrayList<Double> calculateRate(int homeGoals, int homeGoalsDifference, int awayGoals, int awayGoalsDifference, int homeGoalsAgainst, int awayGoalsAgainst) {
 
 
-        DecimalFormat decimalFormat = new DecimalFormat("#,##"); // "." for linux!!!
+        DecimalFormat decimalFormat = new DecimalFormat("#.##"); // "." for linux!!!
         decimalFormat.setRoundingMode(RoundingMode.CEILING);
 
-        double homeWonRate = 4-(0.1*(homeWon+homeLost)/2);
+        double homeWonRate = 4 - (0.175 * (homeGoals + homeGoalsDifference));
         improveRate(homeWonRate);
-        double awayWonRate = 4-(0.1*(awayWon+awayLost)/2);
+        double awayWonRate = 4 - (0.175 * (awayGoals + awayGoalsDifference));
         improveRate(awayWonRate);
-        double drawRate = (0.1*(homeDraw/awayDraw+2)/2);
+        double drawRate = (0.175 * ((homeGoals + 1) / (homeGoalsAgainst + 1)) + ((awayGoals + 1) / (awayGoalsAgainst + 1)));
         improveRate(drawRate);
-        double homeWonOrDraw = (0.1*(homeWon+homeDraw)/2);
+        double homeWonOrDraw = drawRate - homeWonRate;
         improveRate(homeWonOrDraw);
-        double awayWonOrDraw = (0.1*(awayWon+awayDraw)/2);
-        improveRate(awayDraw);
-        double homeOrAwayWon = (0.1*(homeWon+awayWon)/2);
+        double awayWonOrDraw = drawRate - awayWonRate;
+        improveRate(awayWonOrDraw);
+        double homeOrAwayWon = (homeWonOrDraw + awayWonOrDraw) / 2;
         improveRate(homeOrAwayWon);
 
         ArrayList<Double> matchRate = new ArrayList<>();
@@ -74,11 +75,16 @@ public class BetRateData {
     }
 
 
-    public double improveRate(double rate){
+    public double improveRate(double rate) {
         Random random = new Random();
-        if(rate<=1){
-            rate = rate + 1+random.nextDouble();
+        if (rate <= 1 && rate >= -1) {
+            rate = rate + 1.5 + random.nextDouble();
+
+            if (rate < -1) {
+                rate = Math.abs(rate);
+            }
         }
         return rate;
     }
+
 }

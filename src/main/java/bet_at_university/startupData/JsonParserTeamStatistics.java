@@ -16,26 +16,30 @@ public class JsonParserTeamStatistics {
 
     public void addTeamStatistics(TeamStatisticsRepository teamStatisticsRepository) throws IOException {
         TeamStatistics teamStatistics = new TeamStatistics();
-        url = new URL("http://api.football-data.org/v1/competitions/445/leagueTable");
+        url = new URL("http://api.football-data.org/v1/competitions/467/leagueTable");
         scanner = new Scanner(url.openStream());
         json = scanner.nextLine();
+        String[] groupKey = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        JSONObject jsonObject = new JSONObject(json).getJSONObject("standings");
+        int id =1;
 
-        JSONObject jsonObject = new JSONObject(json);
-        JSONArray jsonArray = jsonObject.getJSONArray("standing");
-
-        for (int i = 0; i < 20; i++) {
-            JSONObject jsonTeamStatistics = jsonArray.getJSONObject(i);
-            teamStatistics.setId(i + 1);
-            teamStatistics.setWonMatches(jsonTeamStatistics.getInt("wins"));
-            teamStatistics.setLostMatches(jsonTeamStatistics.getInt("losses"));
-            teamStatistics.setDrawMatches(jsonTeamStatistics.getInt("draws"));
-            teamStatistics.setGoals(jsonTeamStatistics.getInt("goals"));
-            teamStatistics.setPlayedGames(jsonTeamStatistics.getInt("playedGames"));
-            teamStatistics.setPoints(jsonTeamStatistics.getInt("points"));
-            teamStatistics.setImg(jsonTeamStatistics.getString("crestURI"));
-            teamStatistics.setLeagueName("Premier League");
-            teamStatisticsRepository.save(teamStatistics);
-
+        int key =0;
+        for(int i=0; i<8; i++){
+            JSONArray jsonArray = jsonObject.getJSONArray(groupKey[key]);
+            for(int j=0; j<4; j++){
+                JSONObject jsonTeamStatistics = jsonArray.getJSONObject(j);
+                teamStatistics.setId(id);
+                teamStatistics.setImg(jsonTeamStatistics.getString("crestURI"));
+                teamStatistics.setPoints(jsonTeamStatistics.getInt("points"));
+                teamStatistics.setPlayedGames(jsonTeamStatistics.getInt("playedGames"));
+                teamStatistics.setGoals(jsonTeamStatistics.getInt("goals"));
+                teamStatistics.setGoalsAgainst(jsonTeamStatistics.getInt("goalsAgainst"));
+                teamStatistics.setGoalDifference(jsonTeamStatistics.getInt("goalDifference"));
+                teamStatistics.setLeagueName("World Cup 2018 Russia");
+                id++;
+                teamStatisticsRepository.save(teamStatistics);
+            }
+            key++;
         }
     }
 }

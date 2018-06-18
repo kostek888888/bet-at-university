@@ -22,22 +22,29 @@ public class JsonParserTeam {
 
     public void addTeam(TeamRepository teamRepository, TeamStatisticsRepository teamStatisticsRepository) throws IOException {
         Team team = new Team();
-        url = new URL("http://api.football-data.org/v1/competitions/445/leagueTable");
+        url = new URL("http://api.football-data.org/v1/competitions/467/leagueTable");
         scanner = new Scanner(url.openStream());
         json = scanner.nextLine();
         teamStatisticsArrayList = (ArrayList<TeamStatistics>) teamStatisticsRepository.findAll();
 
 
-        JSONObject jsonObject = new JSONObject(json);
-        JSONArray jsonArray = jsonObject.getJSONArray("standing");
+        String[] groupKey = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        JSONObject jsonObject = new JSONObject(json).getJSONObject("standings");
 
+        int id =1;
 
-        for(int i=0; i<20; i++){
-            JSONObject jsonTeam = jsonArray.getJSONObject(i);
-            team.setId(i+1);
-            team.setName(jsonTeam.getString("teamName"));
-            team.setTeamStatistics(teamStatisticsArrayList.get(i));
-            teamRepository.save(team);
+        int key =0;
+        for(int i=0; i<8; i++) {
+            JSONArray jsonArray = jsonObject.getJSONArray(groupKey[key]);
+            for (int j = 0; j < 4; j++) {
+                JSONObject jsonTeam = jsonArray.getJSONObject(j);
+                team.setId(id);
+                team.setName(jsonTeam.getString("team"));
+                team.setTeamStatistics(teamStatisticsArrayList.get(id-1));
+                id++;
+                teamRepository.save(team);
+            }
+            key++;
         }
     }
 }
