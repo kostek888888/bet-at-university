@@ -79,11 +79,11 @@ public class BetRateData {
         Random random = new Random();
         if (rate <= 1 && rate >= -1) {
             rate = rate + 1.5 + random.nextDouble();
-
-            if (rate < -1) {
-                rate = Math.abs(rate);
-            }
         }
+        if (rate < -1) {
+           rate = Math.abs(rate);
+        }
+
         return rate;
     }
 
