@@ -1,0 +1,73 @@
+<div class="content text-center">
+  <div class="bets-table">
+      <h1>Dostępne zakłady</h1>
+    <table class="table table-bordered table-striped">
+      <thead class="bet-table-thead">
+        <tr class="table-active">
+          <th>Drużyny</th>
+          <th>Data meczu</th>
+          <th>Kursy</th>
+          <th>Typ zakładu</th>
+          <th>Kwota zakładu</th>
+          <th>Akcja</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let match of matchesToBetArray; let i=index">
+
+          <input type="hidden" value={{match.id}} #matchId>
+          <td>Gospodarz:
+            <b>{{match.homeTeamId.name}}</b>
+            <br> Goście:
+            <b>{{match.awayTeamId.name}}</b>
+          </td>
+
+          <td>
+            <b>{{match.matchDateAndTime | date: "yyyy/MM/dd"}}</b>
+          </td>
+
+
+          <td>
+            <span [ngStyle]="{ 'color': getColor(betsRatesArray[i].homeTeamWinRate)}"><b> Wygrana gospodarzy: {{betsRatesArray[i].homeTeamWinRate}} </b></span>
+            <br>
+            <span [ngStyle]="{ 'color': getColor(betsRatesArray[i].awayTeamWinRate)}"><b> Wygrana gości: {{betsRatesArray[i].awayTeamWinRate}} </b></span>
+            <br>
+            <span  [ngStyle]="{ 'color': getColor(betsRatesArray[i].drawRate)}"><b> Remis: {{betsRatesArray[i].drawRate}} </b></span>
+            <br>
+            <span  [ngStyle]="{ 'color': getColor(betsRatesArray[i].homeTeamWinOrDrawRate)}"><b> Wygrana gosp. lub remis: {{betsRatesArray[i].homeTeamWinOrDrawRate}} </b></span>
+            <br>
+            <span  [ngStyle]="{ 'color': getColor(betsRatesArray[i].awayTeamWinOrDrawRate)}"><b> Wygrana gości lub remis: {{betsRatesArray[i].awayTeamWinOrDrawRate}} </b></span>
+            <br>
+            <span  [ngStyle]="{ 'color': getColor(betsRatesArray[i].homeWinOrAwayWin)}"><b> Wygrana gosp. lub gości: {{betsRatesArray[i].homeWinOrAwayWin}} </b></span>
+          </td>
+
+          <td>
+            <select #betType>
+              <option value="1">Wygrana gospodarzy</option>
+              <option value="2">Wygrana gości</option>
+              <option value="X">Remis</option>
+              <option value="1X">Wygrana gosp. lub remis</option>
+              <option value="2X">Wygrana gości lub remis</option>
+              <option value="12">Wygrana gosp. lub gości</option>
+            </select>
+          </td>
+          <td>
+            <input type="number" name="price" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" #moneyInsertInput required value=1.0 min=1.0
+              max={{userStatistic.accountBalance}}>PLN
+          </td>
+          <td>
+            <button type="submit" class="btn btn-success btn-sm" (click)="betMatch(matchId.value, betType.value, moneyInsertInput.value)">Obstaw</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bets-table-legend">
+    <b>Legenda:</b>
+    <b style="color: green">Zakład niskiego ryzyka</b>
+    <b style="color: #DAA520">Zakład średniego ryzyka</b>
+    <b style="color: darkred">Zakład wysokiego ryzyka</b>
+  </div>
+</div>

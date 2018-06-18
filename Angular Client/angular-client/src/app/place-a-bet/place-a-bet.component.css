@@ -1,0 +1,16 @@
+td {
+  text-align: left;
+}
+
+table {
+  margin-top: 30px;
+}
+
+.bets-table-legend {
+  text-align: left;
+  display: inline;
+}
+
+.bets-table-legend b {
+  padding-right: 10px;
+}
