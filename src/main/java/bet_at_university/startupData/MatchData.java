@@ -42,7 +42,7 @@ public class MatchData {
             JSONObject jsonMatchResult = jsonArray.getJSONObject(i).getJSONObject("result");
 
             match.setId(i+1);
-            match.setMatchDateAndTime(jsonMatch.getString("date"));
+            match.setMatchDateAndTime(jsonMatch.getString("date").substring(0, 10)+" "+jsonMatch.getString("date").substring(11, 16));
 
             if(jsonMatch.getString("homeTeamName").equals(null) || jsonMatch.getString("awayTeamName").equals(null)){
                 match.setHomeTeamId(null);
