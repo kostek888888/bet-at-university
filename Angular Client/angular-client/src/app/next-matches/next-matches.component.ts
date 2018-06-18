@@ -22,10 +22,10 @@ export class NextMatchesComponent implements OnInit {
     // print only 5 newest matches in table when page init
     this.httpService.getMatchToBet().subscribe(response => {
       this.matchesArray = ConvertMatchModel.toMatchModel(JSON.stringify(response));
+      this.matchesArray = this.sortMatchesByDate(this.matchesArray);
       if (this.matchesArray.length >= 5) {
         this.matchesArray = this.matchesArray.slice(0, 5);
       }
-      this.matchesArray = this.sortMatchesByDate(this.matchesArray);
     });
   }
 
@@ -57,8 +57,8 @@ export class NextMatchesComponent implements OnInit {
   // sortowanie meczy w tabeli, najnowsze na początek
   sortMatchesByDate(matchesArray: Array<MatchModel>): Array<MatchModel> {
     matchesArray.sort((match1, match2): number => {
-      if (match1.matchDateAndTime > match2.matchDateAndTime) { return -1; }
-      if (match1.matchDateAndTime < match2.matchDateAndTime) { return 1; }
+      if (match1.matchDateAndTime < match2.matchDateAndTime) { return -1; }
+      if (match1.matchDateAndTime > match2.matchDateAndTime) { return 1; }
       return 0;
     });
     return matchesArray;

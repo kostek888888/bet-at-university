@@ -23,10 +23,10 @@ export class GamesResultsComponent implements OnInit {
     // print only 5 newest matches in table when page init
     this.httpService.getMatchToNotBet().subscribe(response => {
       this.matchesArray = ConvertMatchModel.toMatchModel(JSON.stringify(response));
+      this.matchesArray = this.sortMatchesByDate(this.matchesArray);
       if (this.matchesArray.length >= 5) {
         this.matchesArray = this.matchesArray.slice(0, 5);
       }
-      this.matchesArray = this.sortMatchesByDate(this.matchesArray);
     });
   }
 

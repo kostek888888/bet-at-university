@@ -7,6 +7,11 @@ export const environment = {
   production: false,
   config: {
     baseURL: 'http://localhost:8080',
-    manuLogoURL: '/assets/logo_white.png'
+    manuLogoURL: '/assets/logo_white.png',
+    sliders: {
+      'sliderImg1': '../assets/slider1.png',
+      'sliderImg2': '../assets/slider2.png',
+      'sliderImg3': '../assets/slider3.png'
+    }
   }
 };

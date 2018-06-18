@@ -1,5 +1,5 @@
 <div class="content text-center">
-    <h1>Tabela ligowa</h1>
+    <h1>Tabela drużyn</h1>
       <table class="table table-striped">
         <thead>
           <tr class="table-active">
@@ -8,21 +8,15 @@
             <th>Rozegranych meczy</th>
             <th>Punkty w lidze</th>
             <th>Gole</th>
-            <th>l. zwycięstw</th>
-            <th>l. porażek</th>
-            <th>l. remisow</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let elem of standingsTable">
             <td>{{elem.id}}</td>
-            <td> <img src="{{elem.teamStatistics.img}}" alt="image not load" height="32" width="32"> {{elem.name}}</td>
+            <td> <img src="{{elem.teamStatistics.img}}" alt="image not load" height="32" width="32"> {{elem.name | translateTeamsNames}}</td>
             <td>{{elem.teamStatistics.playedGames}}</td>
             <td>{{elem.teamStatistics.points}}</td>
             <td>{{elem.teamStatistics.goals}}</td>
-            <td>{{elem.teamStatistics.wonMatches}}</td>
-            <td>{{elem.teamStatistics.lostMatches}}</td>
-            <td>{{elem.teamStatistics.drawMatches}}</td>
           </tr>
         </tbody>
       </table>

@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { BetsHistoryComponent } from './your-profile/bets-history/bets-history.component';
 import { PlaceABetComponent } from './place-a-bet/place-a-bet.component';
 import { NextMatchesComponent } from './next-matches/next-matches.component';
+import { TranslateTeamsNamesPipe } from './models/translate-teams-names.pipe';
 
 const config = {
   apiKey: 'AIzaSyBJLTQwVwvABt0VYLpO3sIk_cdKkpxMs_k',
@@ -45,7 +46,8 @@ const config = {
     RegisterComponent,
     BetsHistoryComponent,
     PlaceABetComponent,
-    NextMatchesComponent
+    NextMatchesComponent,
+    TranslateTeamsNamesPipe
   ],
   imports: [
     BrowserModule,

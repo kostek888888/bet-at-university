@@ -20,7 +20,6 @@ export class LeagueTableComponent implements OnInit {
   getLeagueTable() {
     this.httpService.getLeagueTable().subscribe(leagueTable => {
       this.standingsTable = Convert.toLeagueTableModel(JSON.stringify(leagueTable));
-      console.log(this.standingsTable);
     });
   }
 }

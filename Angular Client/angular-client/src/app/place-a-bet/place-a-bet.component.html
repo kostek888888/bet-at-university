@@ -25,7 +25,7 @@
 
           <input type="hidden" value={{match.id}} #matchId>
           <td>Gospodarz:
-            <b>{{match.homeTeamId.name}}</b>
+            <b>{{match.homeTeamId.name | translateTeamsNames}}</b>
             <br> Goście:
             <b>{{match.awayTeamId.name}}</b>
           </td>
