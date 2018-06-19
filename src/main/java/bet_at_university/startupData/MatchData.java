@@ -37,7 +37,7 @@ public class MatchData {
         JSONArray jsonArray = jsonObject.getJSONArray("fixtures");
 
 
-        for(int i =0; i<64; i++){
+        for(int i =0; i<48; i++){
             JSONObject jsonMatch = jsonArray.getJSONObject(i);
             JSONObject jsonMatchResult = jsonArray.getJSONObject(i).getJSONObject("result");
 

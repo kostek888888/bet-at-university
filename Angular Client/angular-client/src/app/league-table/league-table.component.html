@@ -5,6 +5,7 @@
           <tr class="table-active">
             <th>Pozycja</th>
             <th>Nazwa drużyny</th>
+            <th>Grupa</th>
             <th>Rozegranych meczy</th>
             <th>Punkty w lidze</th>
             <th>Gole</th>
@@ -14,6 +15,7 @@
           <tr *ngFor="let elem of standingsTable;">
             <td>{{setId(elem.id)}}</td>
             <td> <img src="{{elem.teamStatistics.img}}" alt="image not load" height="32" width="32"> {{elem.name | translateTeamsNames}}</td>
+            <td>{{elem.teamStatistics.group}}</td>
             <td>{{elem.teamStatistics.playedGames}}</td>
             <td>{{elem.teamStatistics.points}}</td>
             <td>{{elem.teamStatistics.goals}}</td>

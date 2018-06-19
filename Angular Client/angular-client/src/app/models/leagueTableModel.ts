@@ -20,6 +20,7 @@ export interface TeamStatistics {
   points: number;
   goals: number;
   img: string;
+  group: string;
 }
 
 export enum LeagueName {
