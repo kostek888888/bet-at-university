@@ -35,6 +35,7 @@ public class JsonParserTeamStatistics {
                 teamStatistics.setGoals(jsonTeamStatistics.getInt("goals"));
                 teamStatistics.setGoalsAgainst(jsonTeamStatistics.getInt("goalsAgainst"));
                 teamStatistics.setGoalDifference(jsonTeamStatistics.getInt("goalDifference"));
+                teamStatistics.setGroup(groupKey[key]);
                 teamStatistics.setLeagueName("World Cup 2018 Russia");
                 id++;
                 teamStatisticsRepository.save(teamStatistics);

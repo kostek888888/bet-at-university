@@ -1,9 +1,6 @@
 package bet_at_university.database.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class TeamStatistics {
@@ -25,6 +22,9 @@ public class TeamStatistics {
     private int goalDifference;
 
     private String img;
+
+    @Column(name = "\"group\"")
+    private String group;
 
     public long getId() {
         return id;
@@ -88,5 +88,13 @@ public class TeamStatistics {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 }

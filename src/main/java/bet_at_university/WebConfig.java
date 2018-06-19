@@ -15,7 +15,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "http://localhost:4200",
                         "http://betatuniversity.ddns.net:80",
-                        "http://mkostecki.pl:80"
+                        "http://mkostecki.pl:80",
+                        "http://127.0.0.1:4200"
                 );
     }
 }
