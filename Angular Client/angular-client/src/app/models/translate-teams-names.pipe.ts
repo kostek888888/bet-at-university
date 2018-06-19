@@ -40,7 +40,7 @@ export class TranslateTeamsNamesPipe implements PipeTransform {
             {engName: 'Peru', plName: 'Peru'}
           ];
   transform(value: string, args?: any): string {
-    // value = this.teams.find(x => x.engName === value).plName;
+   // value = this.teams.find(x => x.engName === value).plName;
     return value;
   }
 

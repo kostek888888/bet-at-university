@@ -36,8 +36,8 @@
 
     <tbody>
       <tr *ngFor="let elem of matchesArray">
-        <td>{{elem.homeTeamId.name}}</td>
-        <td>{{elem.awayTeamId.name}}</td>
+        <td>{{elem.homeTeamId.name | translateTeamsNames}}</td>
+        <td>{{elem.awayTeamId.name | translateTeamsNames}}</td>
         <td>{{elem.matchDateAndTime | date: "yyyy/MM/dd"}}</td>
       </tr>
     </tbody>

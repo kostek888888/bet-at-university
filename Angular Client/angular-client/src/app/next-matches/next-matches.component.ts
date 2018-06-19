@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchModel, ConvertMatchModel } from '../models/matchModel';
 import { HttpService } from '../http.service';
+import { TranslateTeamsNamesPipe } from '../models/translate-teams-names.pipe';
 
 @Component({
   selector: 'app-next-matches',

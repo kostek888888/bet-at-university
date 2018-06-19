@@ -11,8 +11,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let elem of standingsTable">
-            <td>{{elem.id}}</td>
+          <tr *ngFor="let elem of standingsTable;">
+            <td>{{setId(elem.id)}}</td>
             <td> <img src="{{elem.teamStatistics.img}}" alt="image not load" height="32" width="32"> {{elem.name | translateTeamsNames}}</td>
             <td>{{elem.teamStatistics.playedGames}}</td>
             <td>{{elem.teamStatistics.points}}</td>

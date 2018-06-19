@@ -22,4 +22,11 @@ export class LeagueTableComponent implements OnInit {
       this.standingsTable = Convert.toLeagueTableModel(JSON.stringify(leagueTable));
     });
   }
+
+  setId(id: number) {
+    if (id % 4 === 0) {
+      return 4;
+    }
+    return id % 4;
+  }
 }
