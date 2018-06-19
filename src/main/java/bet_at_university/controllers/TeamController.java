@@ -13,7 +13,7 @@ public class TeamController {
     @Autowired
     private TeamRepository teamRepository;
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/team")
     public @ResponseBody Iterable<Team> getAllTeams(){
         return teamRepository.findAll();

@@ -46,7 +46,7 @@ public class BetController {
 //    0 - Lost
 //    1 - Winning
 //    2 - not played yet
-    @CrossOrigin(origins = "http://localhost:4200")
+    //@CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "/betMatch")
     public @ResponseBody
     Boolean betMatch(@RequestParam long matchId, @RequestParam long userId, @RequestParam String betType,
@@ -110,12 +110,12 @@ public class BetController {
     }
 
     public double amountToPaidOutWithTax(double moneyInserted, double betRate) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.##" , new DecimalFormatSymbols(Locale.UK));; // del sec param for linux!!!
+        DecimalFormat decimalFormat = new DecimalFormat("#.##" , new DecimalFormatSymbols(Locale.UK)); // del sec param for linux!!!
         decimalFormat.setRoundingMode(RoundingMode.CEILING);
         return Double.parseDouble(decimalFormat.format(moneyInserted * betRate - (0.12 * moneyInserted * betRate)));
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    //@CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(path = "/userBet")
     public @ResponseBody
     ArrayList<Bet> userBet(@RequestParam long userId) {

@@ -19,7 +19,7 @@ public class BetRateController {
     private BetRateRepository betRateRepository;
 
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/betRate")
     public @ResponseBody Iterable<BetRate> getAllBetRate(){
         return betRateRepository.findAll();

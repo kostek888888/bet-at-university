@@ -32,7 +32,7 @@ public class UserController {
 
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/register")
     public @ResponseBody
     Boolean registrationUser(HttpServletResponse response, @RequestParam String name, @RequestParam String surname, @RequestParam String birthDate,
@@ -74,7 +74,7 @@ public class UserController {
 
 
     // return true if cookie create (user is logged in), else return false. Front-end need this to check is user logged
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/logIn", value = "/logIn")
     public @ResponseBody
     Boolean logIn(HttpServletResponse response, @RequestParam String login, @RequestParam String password) {
@@ -103,7 +103,7 @@ public class UserController {
         }
         return  Boolean.FALSE;
     }
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/logOut", value = "/logOut")
     public @ResponseBody Boolean logOut(HttpServletResponse response){
         response.setHeader("Access-Control-Allow-Credentials", "true");
@@ -117,7 +117,7 @@ public class UserController {
     }
 
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/checkUsers", value = "/checkUsers")
     public @ResponseBody Boolean checkUsers(HttpServletResponse response, @RequestParam String login) {
         ArrayList<User> arrayListUsers = new ArrayList<>();
@@ -131,7 +131,7 @@ public class UserController {
     }
 
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/writeFacebookUserInDB")
     public @ResponseBody
     Boolean writeFacebookUserInDB(HttpServletResponse response, @RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String facebookId) {
@@ -163,7 +163,7 @@ public class UserController {
     }
 
     // If user log in with Facebook first check Users FacebookId's in db. If nobody have FacebookId from param it means that the user is not yet saved in the database. Then write user in db by writeFacebookUserInDB()
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/checkUserByFacebookId", value = "/checkUserByFacebookId")
     public @ResponseBody Boolean checkUserByFacebookId(HttpServletResponse response, @RequestParam String facebookId) {
         ArrayList<User> arrayListUsers = new ArrayList<>();
@@ -176,7 +176,7 @@ public class UserController {
         return Boolean.FALSE;
     }
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/loginFacebookUser", value = "/loginFacebookUser")
     public @ResponseBody
     Boolean loginFacebookUser(HttpServletResponse response, @RequestParam String facebookId) {

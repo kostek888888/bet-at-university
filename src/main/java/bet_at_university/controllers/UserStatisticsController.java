@@ -19,13 +19,13 @@ public class UserStatisticsController {
     private UserStatisticRepository userStatisticRepository;
 
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/allUsersStatistics")
     public @ResponseBody Iterable<UserStatistics> getAllUserStatistics(){
         return userStatisticRepository.findAll();
     }
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/userStatisticsFromId")
     public @ResponseBody
     Optional<UserStatistics> getUserStatisticsFromId( @RequestParam long id){
@@ -33,14 +33,14 @@ public class UserStatisticsController {
     }
 
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/checkAccountBalance")
     public @ResponseBody double checkAccountBalance(@RequestParam long userId){
         userStatisticsArrayList = (ArrayList<UserStatistics>) userStatisticRepository.findAll();
         return userStatisticsArrayList.get((int) userId-1).getAccountBalance();
     }
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/pay")
     public @ResponseBody  Optional<UserStatistics> pay(@RequestParam long userId, @RequestParam double money){
         UserStatistics userStatistics = new UserStatistics();
@@ -55,7 +55,7 @@ public class UserStatisticsController {
         return userStatisticRepository.findById(userId);
     }
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @PostMapping(path = "/withdrawal")
     public @ResponseBody  Optional<UserStatistics> withdrawal(@RequestParam long userId, @RequestParam double money){
         UserStatistics userStatistics = new UserStatistics();

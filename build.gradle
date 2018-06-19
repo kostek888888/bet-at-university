@@ -3,12 +3,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.3.RELEASE")
     }
 }
 
 plugins {
-    id 'org.springframework.boot' version '2.0.1.RELEASE'
+    id 'org.springframework.boot' version '2.0.3.RELEASE'
 }
 
 group 'bet-at-university'
@@ -46,11 +46,11 @@ configurations {
 dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.1.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.3.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
-    implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.0.1.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.0.3.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.1.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.3.RELEASE'
 
 
     // https://mvnrepository.com/artifact/org.json/json
@@ -58,10 +58,10 @@ dependencies {
 
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.1.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.3.RELEASE'
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.0.1.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.0.3.RELEASE'
     // https://mvnrepository.com/artifact/org.webjars/bootstrap
     implementation group: 'org.webjars', name: 'bootstrap', version: '4.1.0'
 
@@ -109,7 +109,7 @@ dependencies {
 
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.0.1.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.0.3.RELEASE'
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
 //    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.0.2.RELEASE'

@@ -34,7 +34,7 @@ public class MatchController {
     @Autowired
     private MatchRepository matchRepository;
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/matchToBet")
     public @ResponseBody ArrayList<Match> getAllMatchesToBet(){
         matchArrayList = (ArrayList<Match>) matchRepository.findAll();
@@ -48,7 +48,7 @@ public class MatchController {
         return matchToBetArrayList;
     }
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/matchToNotBet")
     public @ResponseBody ArrayList<Match> getAllMatchesToNotBet(){
         matchArrayList = (ArrayList<Match>) matchRepository.findAll();
@@ -62,13 +62,13 @@ public class MatchController {
         return matchToBetArrayList;
     }
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/allMatches")
     public @ResponseBody Iterable<Match> getAllMatches(){
         return matchRepository.findAll();
     }
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/matchId")
     public @ResponseBody
     Optional<Match> getMatchFromId(@RequestParam int id){

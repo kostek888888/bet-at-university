@@ -15,7 +15,7 @@ public class TeamStatisticsController {
     @Autowired
     private TeamStatisticsRepository teamStatisticsRepository;
 
-    @CrossOrigin(origins="http://localhost:4200")
+    //@CrossOrigin(origins="http://localhost:4200")
     @GetMapping(path = "/teamStatistics")
     public @ResponseBody Iterable<TeamStatistics> getAllTeamStatistics(){
         return teamStatisticsRepository.findAll();
